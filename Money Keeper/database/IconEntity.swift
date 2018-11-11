@@ -23,7 +23,7 @@ class IconEntity{
             let statement = try Database.shared.connection?.prepareStatement(SQL: SQL)
             guard sqlite3_step(statement) == SQLITE_DONE
                 else{
-                print("Create table step error.")
+                    print("ICON: Create table step error.")
                 return
             }
             print("ICON table created.")
@@ -125,13 +125,13 @@ class IconEntity{
             
         guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK
             else{
-            throw SQLiteError.Bind(message: "Bind error")
+                throw SQLiteError.Bind(message: "ICON: Bind error")
         }
             
         guard sqlite3_step(insertStatement) == SQLITE_DONE else{
-            throw SQLiteError.Step(message: "Insert step error")
+            throw SQLiteError.Step(message: "ICON: Insert step error")
         }
-        print("Successfully inserted row.")
+        print("ICON: Successfully inserted row.")
     }
     
     func count() -> Int{

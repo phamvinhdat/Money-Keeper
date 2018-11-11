@@ -28,14 +28,14 @@ class CategoryEntity{
             let statement = try Database.shared.connection?.prepareStatement(SQL: SQL)
             guard sqlite3_step(statement) == SQLITE_DONE
                 else{
-                    print("Create category table step error.")
+                    print("CATEGORY: Create table step error.")
                     return
             }
             print("CATEGORY table created.")
             //insert value
             
         }catch{
-            print("Prepare statement error.")
+            print("CATEGORY: Prepare statement error.")
         }
         
     }
@@ -60,15 +60,15 @@ class CategoryEntity{
         }
         
         guard sqlite3_step(insertStatement) == SQLITE_DONE else{
-            throw SQLiteError.Step(message: "Insert step error")
+            throw SQLiteError.Step(message: "CATEGORY: Insert step error")
         }
-        print("Successfully inserted row.")
+        print("CATEGORY: Successfully inserted row.")
     }
     
     func count() -> Int{
         let SQL = """
                   SELECT COUNT()
-                  FROM ICON
+                  FROM CATEGORY
                   """
         guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
             else{
