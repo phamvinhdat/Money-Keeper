@@ -40,20 +40,23 @@ class CategoryEntity{
         
     }
     
-    func insert(ID: Int, NAME: String) throws{
+    //KIND: 1_Expense, 2_Income
+    //PARENTCATEGORY: 0_root
+    func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Int) throws{
         let SQL = """
                   INSERT INTO CATEGORY (ID, NAME, IDICON, PARENTCATEGORY, KIND)
                   VALUES (?, ?, ?, ?, ?)
                   """
-        let name = NAME as NSString
+        
         let insertStatement = try Database.shared.connection?.prepareStatement(SQL: SQL)
         defer{
             sqlite3_finalize(insertStatement)
         }
         
-        guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK
+        let name = NAME as NSString
+        guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 3, Int32(IDICON)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 4, Int32(PARENTCATEGORY)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 5, Int32(KIND)) == SQLITE_OK
             else{
-                throw SQLiteError.Bind(message: "Bind error")
+                throw SQLiteError.Bind(message: "Category bind error.")
         }
         
         guard sqlite3_step(insertStatement) == SQLITE_DONE else{
