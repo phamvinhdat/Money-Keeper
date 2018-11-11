@@ -8,20 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		C4D82C1121975C18006898D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C1021975C18006898D8 /* AppDelegate.swift */; };
-		C4D82C1321975C18006898D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C1221975C18006898D8 /* ViewController.swift */; };
+		C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C1221975C18006898D8 /* InputViewController.swift */; };
 		C4D82C1621975C18006898D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D82C1421975C18006898D8 /* Main.storyboard */; };
 		C4D82C1821975C1B006898D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D82C1721975C1B006898D8 /* Assets.xcassets */; };
 		C4D82C1B21975C1B006898D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D82C1921975C1B006898D8 /* LaunchScreen.storyboard */; };
+		C4D82C2421975C75006898D8 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D82C2321975C75006898D8 /* libsqlite3.tbd */; };
+		C4D82C292197E76A006898D8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */; };
+		C4D82C2B2198054A006898D8 /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C2A2198054A006898D8 /* SQLiteDatabase.swift */; };
+		C4D82C2F219821C1006898D8 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C2E219821C1006898D8 /* Database.swift */; };
+		C4D82C3121982839006898D8 /* IconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C3021982839006898D8 /* IconEntity.swift */; };
+		C4D82C3321987706006898D8 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C3221987706006898D8 /* CategoryEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C4D82C0D21975C18006898D8 /* Money Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Keeper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D82C1021975C18006898D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C4D82C1221975C18006898D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C4D82C1221975C18006898D8 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		C4D82C1521975C18006898D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4D82C1721975C1B006898D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4D82C1A21975C1B006898D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4D82C1C21975C1B006898D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4D82C2321975C75006898D8 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Money Keeper-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4D82C2A2198054A006898D8 /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
+		C4D82C2E219821C1006898D8 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		C4D82C3021982839006898D8 /* IconEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconEntity.swift; sourceTree = "<group>"; };
+		C4D82C3221987706006898D8 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4D82C2421975C75006898D8 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +54,7 @@
 			children = (
 				C4D82C0F21975C18006898D8 /* Money Keeper */,
 				C4D82C0E21975C18006898D8 /* Products */,
+				C4D82C2221975C75006898D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +69,44 @@
 		C4D82C0F21975C18006898D8 /* Money Keeper */ = {
 			isa = PBXGroup;
 			children = (
+				C4D82C2D21982197006898D8 /* database */,
+				C4D82C2C21980558006898D8 /* sqlite library */,
+				C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */,
 				C4D82C1021975C18006898D8 /* AppDelegate.swift */,
-				C4D82C1221975C18006898D8 /* ViewController.swift */,
+				C4D82C1221975C18006898D8 /* InputViewController.swift */,
+				C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */,
 				C4D82C1421975C18006898D8 /* Main.storyboard */,
 				C4D82C1721975C1B006898D8 /* Assets.xcassets */,
 				C4D82C1921975C1B006898D8 /* LaunchScreen.storyboard */,
 				C4D82C1C21975C1B006898D8 /* Info.plist */,
 			);
 			path = "Money Keeper";
+			sourceTree = "<group>";
+		};
+		C4D82C2221975C75006898D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4D82C2321975C75006898D8 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C4D82C2C21980558006898D8 /* sqlite library */ = {
+			isa = PBXGroup;
+			children = (
+				C4D82C2A2198054A006898D8 /* SQLiteDatabase.swift */,
+			);
+			path = "sqlite library";
+			sourceTree = "<group>";
+		};
+		C4D82C2D21982197006898D8 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				C4D82C2E219821C1006898D8 /* Database.swift */,
+				C4D82C3021982839006898D8 /* IconEntity.swift */,
+				C4D82C3221987706006898D8 /* CategoryEntity.swift */,
+			);
+			path = database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +141,7 @@
 				TargetAttributes = {
 					C4D82C0C21975C18006898D8 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -135,7 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4D82C1321975C18006898D8 /* ViewController.swift in Sources */,
+				C4D82C3121982839006898D8 /* IconEntity.swift in Sources */,
+				C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */,
+				C4D82C3321987706006898D8 /* CategoryEntity.swift in Sources */,
+				C4D82C292197E76A006898D8 /* CategoryCollectionViewCell.swift in Sources */,
+				C4D82C2B2198054A006898D8 /* SQLiteDatabase.swift in Sources */,
+				C4D82C2F219821C1006898D8 /* Database.swift in Sources */,
 				C4D82C1121975C18006898D8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +333,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6M8FSBT68;
 				INFOPLIST_FILE = "Money Keeper/Info.plist";
@@ -291,6 +343,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "andromeda.Money-Keeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Money Keeper/Money Keeper-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6M8FSBT68;
 				INFOPLIST_FILE = "Money Keeper/Info.plist";
@@ -309,6 +364,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "andromeda.Money-Keeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Money Keeper/Money Keeper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
