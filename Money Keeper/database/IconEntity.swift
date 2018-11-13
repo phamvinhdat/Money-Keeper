@@ -75,6 +75,9 @@ class IconEntity{
             try insert(ID: 45, NAME: "wallet")
             try insert(ID: 46, NAME: "wifi-signal")
             try insert(ID: 47, NAME: "workspace")
+            try insert(ID: 48, NAME: "library")
+            try insert(ID: 49, NAME: "browser")
+            try insert(ID: 50, NAME: "drop")
         }catch{
             print("Prepare statement error.")
         }

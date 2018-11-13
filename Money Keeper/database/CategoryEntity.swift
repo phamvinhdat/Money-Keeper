@@ -32,7 +32,14 @@ class CategoryEntity{
                     return
             }
             print("CATEGORY table created.")
-            //insert value
+            //insert value default
+            try insert(ID: 1, NAME: "Education", IDICON: 25, PARENTCATEGORY: 0, KIND: 0)
+            try insert(ID: 2, NAME: "Tuition fee", IDICON: 43, PARENTCATEGORY: 1, KIND: 0)
+            try insert(ID: 3, NAME: "Book", IDICON: 48, PARENTCATEGORY: 48, KIND: 0)
+            try insert(ID: 4, NAME: "Home", IDICON: 34, PARENTCATEGORY: 0, KIND: 0)
+            try insert(ID: 5, NAME: "Internet", IDICON: 46, PARENTCATEGORY: 4, KIND: 0)
+            try insert(ID: 6, NAME: "Water and electricity", IDICON: 50, PARENTCATEGORY: 4, KIND: 0)
+            try insert(ID: 7, NAME: "Rent", IDICON: <#T##Int#>, PARENTCATEGORY: <#T##Int#>, KIND: <#T##Int#>)
             
         }catch{
             print("CATEGORY: Prepare statement error.")
@@ -40,7 +47,7 @@ class CategoryEntity{
         
     }
     
-    //KIND: 1_Expense, 2_Income
+    //KIND: 0_Expense, 1_Income
     //PARENTCATEGORY: 0_root
     func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Int) throws{
         let SQL = """
