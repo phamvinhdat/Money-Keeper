@@ -204,6 +204,50 @@ class CategoryEntity{
         }
         return Int(sqlite3_column_int(queryStatement, 0))
     }
+    
+    func getTblCategory(KIND: Kind) -> [Category]{
+        var tblCategory = [Category]()
+        let SQL = "SELECT* FROM CATEGORY C WHERE C.KIND = ?"
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("CATEGORY: getTblCategory prepare statement fail.")
+                return tblCategory
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_bind_int(queryStatement, 1, Int32(KIND.rawValue)) == SQLITE_OK
+            else{
+                return tblCategory
+        }
+        
+        while sqlite3_step(queryStatement) == SQLITE_ROW{
+            let category = Category()
+            category.id = Int(sqlite3_column_int(queryStatement, 0))
+            let queryTemp = sqlite3_column_text(queryStatement, 1)
+            category.name = String(cString: queryTemp!)
+            category.idIcon = Int(sqlite3_column_int(queryStatement, 2))
+            category.parentCategory = Int(sqlite3_column_int(queryStatement, 3))
+            let kindTemp = Int(sqlite3_column_int(queryStatement, 4))
+            if kindTemp == Kind.expense.rawValue{
+                category.kind = .expense
+            }else{
+                category.kind = .income
+            }
+            tblCategory.append(category)
+        }
+
+        return tblCategory
+    }
+}
+
+class Category{
+    var id = Int()
+    var name = String()
+    var idIcon = Int()
+    var parentCategory = Int()
+    var kind = Kind.income
 }
 
 enum Kind: Int{

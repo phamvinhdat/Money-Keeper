@@ -9,7 +9,9 @@
 import UIKit
 
 class InputViewController: UIViewController {
-
+    
+    var arrayExpense = [Category]()
+    var arrayIncome = [Category]()
     var isExpense:Bool = true
     @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var txtNote: UITextField!
@@ -20,20 +22,21 @@ class InputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCellCategory_viewDidLoad()
+        arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
+        arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
     }
 
     @IBAction func expense_selectorChange(_ sender: Any) {
         //flip the boolean
         self.isExpense = !self.isExpense
+        categoryCollectionView.reloadData()
         
         //check the bool and set label and collection view
-        if(isExpense){
+        if isExpense{
             self.lblExpense.text = "Expense"
-            
         }
         else{
             self.lblExpense.text = "Income"
-            
         }
     }
     
@@ -57,7 +60,12 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return IconEntity.shared.count()
+        if isExpense{
+            return CategoryEntity.shared.count(KIND: .expense)
+        }
+        else{
+            return CategoryEntity.shared.count(KIND: .income)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,7 +74,13 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
         cell.layer.borderWidth = 1
         cell.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         cell.imgCategory.contentMode = .scaleAspectFit
-        cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: indexPath.row + 1)!)
+        if isExpense{
+            cell.lblName.text = arrayExpense[indexPath.row].name
+            cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayExpense[indexPath.row].idIcon)!)
+        }else{
+            cell.lblName.text = arrayIncome[indexPath.row].name
+            cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayIncome[indexPath.row].idIcon)!)
+        }
         return cell
     }
     
