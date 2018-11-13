@@ -33,30 +33,30 @@ class CategoryEntity{
             }
             print("CATEGORY table created.")
             //insert value default
-            try insert(ID: 1, NAME: "Education", IDICON: 25, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 2, NAME: "Tuition fee", IDICON: 43, PARENTCATEGORY: 1, KIND: 0)
-            try insert(ID: 3, NAME: "Book", IDICON: 48, PARENTCATEGORY: 48, KIND: 0)
-            try insert(ID: 4, NAME: "Home", IDICON: 34, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 5, NAME: "Internet", IDICON: 46, PARENTCATEGORY: 4, KIND: 0)
-            try insert(ID: 6, NAME: "Water and electricity", IDICON: 50, PARENTCATEGORY: 4, KIND: 0)
-            try insert(ID: 7, NAME: "Rent", IDICON: 51, PARENTCATEGORY: 4, KIND: 0)
-            try insert(ID: 8, NAME: "Health & Fitness", IDICON: 22, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 9, NAME: "Doctor", IDICON: 27, PARENTCATEGORY: 8, KIND: 0)
-            try insert(ID: 10, NAME: "Pharmacy", IDICON: 15, PARENTCATEGORY: 8, KIND: 0)
-            try insert(ID: 11, NAME: "Food", IDICON: 21, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 12, NAME: "Entertainment", IDICON: 53, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 13, NAME: "Movies", IDICON: 54, PARENTCATEGORY: 12, KIND: 0)
-            try insert(ID: 14, NAME: "Travel", IDICON: 5, PARENTCATEGORY: 12, KIND: 0)
-            try insert(ID: 15, NAME: "Shopping", IDICON: 28, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 16, NAME: "Clothes", IDICON: 44, PARENTCATEGORY: 15, KIND: 0)
-            try insert(ID: 17, NAME: "Transport", IDICON: 19, PARENTCATEGORY: 0, KIND: 0)
-            try insert(ID: 18, NAME: "Fuel", IDICON: 17, PARENTCATEGORY: 17, KIND: 0)
-            try insert(ID: 19, NAME: "Repair vehicles", IDICON: 55, PARENTCATEGORY: 17, KIND: 0)
-            try insert(ID: 20, NAME: "Salary", IDICON: 24, PARENTCATEGORY: 0, KIND: 1)
-            try insert(ID: 21, NAME: "Savings interest", IDICON: 56, PARENTCATEGORY: 0, KIND: 1)
-            try insert(ID: 22, NAME: "Bonus", IDICON: 57, PARENTCATEGORY: 0, KIND: 1)
-            try insert(ID: 23, NAME: "Awarded", IDICON: 58, PARENTCATEGORY: 0, KIND: 1)
-            try insert(ID: 24, NAME: "Other", IDICON: 4, PARENTCATEGORY: 0, KIND: 1)
+            try insert(ID: 1, NAME: "Education", IDICON: 25, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 2, NAME: "Tuition fee", IDICON: 43, PARENTCATEGORY: 1, KIND: .expense)
+            try insert(ID: 3, NAME: "Book", IDICON: 48, PARENTCATEGORY: 48, KIND: .expense)
+            try insert(ID: 4, NAME: "Home", IDICON: 34, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 5, NAME: "Internet", IDICON: 46, PARENTCATEGORY: 4, KIND: .expense)
+            try insert(ID: 6, NAME: "Water and electricity", IDICON: 50, PARENTCATEGORY: 4, KIND: .expense)
+            try insert(ID: 7, NAME: "Rent", IDICON: 51, PARENTCATEGORY: 4, KIND: .expense)
+            try insert(ID: 8, NAME: "Health & Fitness", IDICON: 22, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 9, NAME: "Doctor", IDICON: 27, PARENTCATEGORY: 8, KIND: .expense)
+            try insert(ID: 10, NAME: "Pharmacy", IDICON: 15, PARENTCATEGORY: 8, KIND: .expense)
+            try insert(ID: 11, NAME: "Food", IDICON: 21, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 12, NAME: "Entertainment", IDICON: 53, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 13, NAME: "Movies", IDICON: 54, PARENTCATEGORY: 12, KIND: .expense)
+            try insert(ID: 14, NAME: "Travel", IDICON: 5, PARENTCATEGORY: 12, KIND: .expense)
+            try insert(ID: 15, NAME: "Shopping", IDICON: 28, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 16, NAME: "Clothes", IDICON: 44, PARENTCATEGORY: 15, KIND: .expense)
+            try insert(ID: 17, NAME: "Transport", IDICON: 19, PARENTCATEGORY: 0, KIND: .expense)
+            try insert(ID: 18, NAME: "Fuel", IDICON: 17, PARENTCATEGORY: 17, KIND: .expense)
+            try insert(ID: 19, NAME: "Repair vehicles", IDICON: 55, PARENTCATEGORY: 17, KIND: .expense)
+            try insert(ID: 20, NAME: "Salary", IDICON: 24, PARENTCATEGORY: 0, KIND: .income)
+            try insert(ID: 21, NAME: "Savings interest", IDICON: 56, PARENTCATEGORY: 0, KIND: .income)
+            try insert(ID: 22, NAME: "Bonus", IDICON: 57, PARENTCATEGORY: 0, KIND: .income)
+            try insert(ID: 23, NAME: "Awarded", IDICON: 58, PARENTCATEGORY: 0, KIND: .income)
+            try insert(ID: 24, NAME: "Other", IDICON: 4, PARENTCATEGORY: 0, KIND: .income)
             
         }catch{
             print("CATEGORY: Prepare statement error.")
@@ -64,9 +64,8 @@ class CategoryEntity{
         
     }
     
-    //KIND: 0_Expense, 1_Income
     //PARENTCATEGORY: 0_root
-    func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Int) throws{
+    func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Kind) throws{
         let SQL = """
                   INSERT INTO CATEGORY (ID, NAME, IDICON, PARENTCATEGORY, KIND)
                   VALUES (?, ?, ?, ?, ?)
@@ -78,7 +77,7 @@ class CategoryEntity{
         }
         
         let name = NAME as NSString
-        guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 3, Int32(IDICON)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 4, Int32(PARENTCATEGORY)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 5, Int32(KIND)) == SQLITE_OK
+        guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 3, Int32(IDICON)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 4, Int32(PARENTCATEGORY)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 5, Int32(KIND.rawValue)) == SQLITE_OK
             else{
                 throw SQLiteError.Bind(message: "Category bind error.")
         }
@@ -96,6 +95,7 @@ class CategoryEntity{
                   """
         guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
             else{
+                print("CATEGORY: Count prepare statement fail.")
                 return 0
         }
         defer{
@@ -104,9 +104,40 @@ class CategoryEntity{
         
         guard sqlite3_step(queryStatement) == SQLITE_ROW
             else{
+                print("CATEGORY: Count step fail.")
                 return 0
         }
-        
         return Int(sqlite3_column_int(queryStatement, 0))
     }
+    
+    func count(KIND: Kind) -> Int{
+        let SQL = "SELECT COUNT() FROM CATEGORY C WHERE C.KIND = ?"
+        
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("CATEGORY: Count prepare statement fail.")
+                return 0;
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_bind_int(queryStatement, 1, Int32(KIND.rawValue)) == SQLITE_OK
+            else{
+                print("CATEGORY: Count bind fail.")
+                return 0;
+        }
+        
+        guard sqlite3_step(queryStatement) == SQLITE_ROW
+            else{
+                print("CATEGORY: Count step fail.")
+                return 0
+        }
+        return Int(sqlite3_column_int(queryStatement, 0))
+    }
+}
+
+enum Kind: Int{
+    case expense
+    case income
 }
