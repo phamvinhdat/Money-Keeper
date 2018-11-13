@@ -10,6 +10,7 @@ import UIKit
 
 class InputViewController: UIViewController {
     
+    private var datePicker: UIDatePicker?
     var arrayExpense = [Category]()
     var arrayIncome = [Category]()
     var isExpense:Bool = true
@@ -24,6 +25,8 @@ class InputViewController: UIViewController {
         setCellCategory_viewDidLoad()
         arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
         arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
+        setDatePicker_viewDidLoad()
+        setTxtDay_viewDidLoad()
     }
 
     @IBAction func expense_selectorChange(_ sender: Any) {
@@ -40,11 +43,30 @@ class InputViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //dismiss the keyboard when the view tapped on
-        self.txtDate.resignFirstResponder()
-        self.txtExpenseIncome.resignFirstResponder()
-        self.txtNote.resignFirstResponder()
+    @objc func dateChanged(DatePicker: UIDatePicker){
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
+        txtDate.text = dateFormat.string(from: DatePicker.date)
+    }
+    
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    func setDatePicker_viewDidLoad(){
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(InputViewController.dateChanged(DatePicker:)), for: .valueChanged)
+    }
+    
+    func setTxtDay_viewDidLoad(){
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
+        txtDate.text = dateFormat.string(from: Date())
+        txtDate.textAlignment = .center
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InputViewController.viewTapped(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
+        txtDate.inputView = datePicker
     }
 }
 
