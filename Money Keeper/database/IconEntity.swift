@@ -84,6 +84,8 @@ class IconEntity{
             try insert(ID: 54, NAME: "popcorn")
             try insert(ID: 55, NAME: "tools")
             try insert(ID: 56, NAME: "discount")
+            try insert(ID: 57, NAME: "bonus")
+            try insert(ID: 58, NAME: "trophy")
         }catch{
             print("Prepare statement error.")
         }

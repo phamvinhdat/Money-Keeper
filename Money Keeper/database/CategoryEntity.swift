@@ -54,7 +54,9 @@ class CategoryEntity{
             try insert(ID: 19, NAME: "Repair vehicles", IDICON: 55, PARENTCATEGORY: 17, KIND: 0)
             try insert(ID: 20, NAME: "Salary", IDICON: 24, PARENTCATEGORY: 0, KIND: 1)
             try insert(ID: 21, NAME: "Savings interest", IDICON: 56, PARENTCATEGORY: 0, KIND: 1)
-            try insert(ID: 22, NAME: "Bonus", IDICON: <#T##Int#>, PARENTCATEGORY: <#T##Int#>, KIND: <#T##Int#>)
+            try insert(ID: 22, NAME: "Bonus", IDICON: 57, PARENTCATEGORY: 0, KIND: 1)
+            try insert(ID: 23, NAME: "Awarded", IDICON: 58, PARENTCATEGORY: 0, KIND: 1)
+            try insert(ID: 24, NAME: "Other", IDICON: 4, PARENTCATEGORY: 0, KIND: 1)
             
         }catch{
             print("CATEGORY: Prepare statement error.")
