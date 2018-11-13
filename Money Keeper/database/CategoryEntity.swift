@@ -135,9 +135,84 @@ class CategoryEntity{
         }
         return Int(sqlite3_column_int(queryStatement, 0))
     }
+    
+    func getName(ID: Int)->String?{
+        let SQL = """
+                  SELECT NAME
+                  FROM CATEGORY
+                  WHERE ID = ?
+                  """
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                return nil
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK
+            else{
+                return nil
+        }
+        
+        guard sqlite3_step(queryStatement) == SQLITE_ROW
+            else{
+                return nil
+        }
+        
+        guard let queryResult = sqlite3_column_text(queryStatement, 0) else{
+            return nil
+        }
+        let result = String(cString: queryResult) as  String
+        return result
+    }
+    
+    func getIntPropertybyID(ID: Int, property: IntProperty) -> Int?{
+        var SQL:String? = nil
+        
+        switch property{
+        case .IDIcon:
+            SQL = "SELECT C.IDICON FROM CATEGORY C WHERE C.ID = ?"
+            break
+        case .kind:
+            SQL = "SELECT C.KIND FROM CATEGORY C WHERE C.ID = ?"
+            break
+        case .parentCategory:
+            SQL = "SELECT C.PARENTCATEGORY FROM CATEGORY C WHERE C.ID = ?"
+            break
+        }
+        
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL!)
+            else{
+                print("CATEGORY: getIntPropertybyID prepare statement fail.")
+                return nil
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK
+            else{
+                print("CATEGORY: getIntPropertybyID bind fail.")
+                return nil
+        }
+        
+        guard sqlite3_step(queryStatement) == SQLITE_ROW
+            else{
+                print("CATEGORY: getIntPropertybyID step fail.")
+                return nil
+        }
+        return Int(sqlite3_column_int(queryStatement, 0))
+    }
 }
 
 enum Kind: Int{
     case expense
     case income
+}
+
+enum IntProperty: Int{
+    case IDIcon
+    case parentCategory
+    case kind
 }
