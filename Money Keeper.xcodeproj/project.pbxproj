@@ -71,8 +71,8 @@
 			children = (
 				C4D82C2D21982197006898D8 /* database */,
 				C4D82C2C21980558006898D8 /* sqlite library */,
-				C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */,
 				C4D82C1021975C18006898D8 /* AppDelegate.swift */,
+				C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */,
 				C4D82C1221975C18006898D8 /* InputViewController.swift */,
 				C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */,
 				C4D82C1421975C18006898D8 /* Main.storyboard */,

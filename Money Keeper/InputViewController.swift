@@ -22,9 +22,11 @@ class InputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCellCategory_viewDidLoad()
         arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
         arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
+        setCellCategory_viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InputViewController.viewTapped(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
     }
@@ -41,6 +43,17 @@ class InputViewController: UIViewController {
         else{
             self.lblExpense.text = "Income"
         }
+    }
+    
+    @IBAction func btnDay_touchUpInside(_ sender: UIButton) {
+        var isNextDay = true
+        if sender.tag == 1{
+            isNextDay = false
+        }
+        datePicker!.date = NSDate(timeInterval: TimeInterval(60 * 60 * (isNextDay == true ? 24 : -24)), since: datePicker!.date) as Date
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
+        txtDate.text = dateFormat.string(from: datePicker!.date)
     }
     
     @objc func dateChanged(DatePicker: UIDatePicker){
@@ -64,8 +77,6 @@ class InputViewController: UIViewController {
         dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
         txtDate.text = dateFormat.string(from: Date())
         txtDate.textAlignment = .center
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InputViewController.viewTapped(gestureRecognizer:)))
-        view.addGestureRecognizer(tapGesture)
         txtDate.inputView = datePicker
     }
 }
