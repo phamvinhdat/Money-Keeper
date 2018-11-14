@@ -187,19 +187,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpx-Ex-paw">
+                                                    <rect key="frame" x="55.5" y="52.5" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="2y5-oA-NED" secondAttribute="bottom" id="0JX-1f-Stv"/>
+                                            <constraint firstItem="Hpx-Ex-paw" firstAttribute="centerX" secondItem="Vhx-U7-vie" secondAttribute="centerX" id="1h1-Gc-jgW"/>
                                             <constraint firstItem="Gnh-T4-sYa" firstAttribute="leading" secondItem="Vhx-U7-vie" secondAttribute="leading" constant="10" id="4T5-cK-T2h"/>
                                             <constraint firstAttribute="trailing" secondItem="2y5-oA-NED" secondAttribute="trailing" id="70f-Ww-qPC"/>
                                             <constraint firstItem="Gnh-T4-sYa" firstAttribute="top" secondItem="Vhx-U7-vie" secondAttribute="top" constant="5" id="BFa-yT-UkZ"/>
+                                            <constraint firstItem="Hpx-Ex-paw" firstAttribute="centerY" secondItem="Vhx-U7-vie" secondAttribute="centerY" id="W1u-cF-BBV"/>
                                             <constraint firstAttribute="trailing" secondItem="Gnh-T4-sYa" secondAttribute="trailing" constant="10" id="flY-TW-fZG"/>
                                             <constraint firstItem="2y5-oA-NED" firstAttribute="leading" secondItem="Vhx-U7-vie" secondAttribute="leading" id="jg5-4i-uZh"/>
                                             <constraint firstItem="2y5-oA-NED" firstAttribute="top" secondItem="Gnh-T4-sYa" secondAttribute="bottom" id="nEV-UV-Ndh"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imgCategory" destination="Gnh-T4-sYa" id="eCd-20-nH4"/>
+                                            <outlet property="lblEdit" destination="Hpx-Ex-paw" id="rot-DX-54c"/>
                                             <outlet property="lblName" destination="2y5-oA-NED" id="Phw-2R-52W"/>
                                         </connections>
                                     </collectionViewCell>

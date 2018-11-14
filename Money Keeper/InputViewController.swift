@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InputViewController: UIViewController {
+class InputViewController: UIViewController, UITextFieldDelegate{
     
     private var datePicker: UIDatePicker?
     var arrayExpense = [Category]()
@@ -78,6 +78,8 @@ class InputViewController: UIViewController {
         txtDate.text = dateFormat.string(from: Date())
         txtDate.textAlignment = .center
         txtDate.inputView = datePicker
+        txtDate.delegate = self
+        txtDate.resignFirstResponder()
     }
 }
 
@@ -94,10 +96,10 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isExpense{
-            return CategoryEntity.shared.count(KIND: .expense)
+            return CategoryEntity.shared.count(KIND: .expense) + 1//cell edit in the last
         }
         else{
-            return CategoryEntity.shared.count(KIND: .income)
+            return CategoryEntity.shared.count(KIND: .income) + 1
         }
     }
     
@@ -107,24 +109,39 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
         cell.layer.borderWidth = 1
         cell.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         cell.imgCategory.contentMode = .scaleAspectFit
-        if isExpense{
-            cell.lblName.text = arrayExpense[indexPath.row].name
-            cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayExpense[indexPath.row].idIcon)!)
-        }else{
-            cell.lblName.text = arrayIncome[indexPath.row].name
-            cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayIncome[indexPath.row].idIcon)!)
+        let numberofCell = isExpense ? arrayExpense.count : arrayIncome.count
+        
+        if(indexPath.row == numberofCell){
+            cell.lblEdit.isHidden = false
+            cell.lblEdit.text = "Edit >"
+            cell.lblEdit.contentMode = .center
+            cell.imgCategory.isHidden = true
+            cell.lblName.isHidden = true
         }
+        else{
+            cell.lblName.isHidden = false
+            cell.imgCategory.isHidden = false
+            cell.lblEdit.isHidden = true
+            if isExpense{
+                cell.lblName.text = arrayExpense[indexPath.row].name
+                cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayExpense[indexPath.row].idIcon)!)
+            }else{
+                cell.lblName.text = arrayIncome[indexPath.row].name
+                cell.imgCategory.image = UIImage(named: IconEntity.shared.getName(ID: arrayIncome[indexPath.row].idIcon)!)
+            }
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.layer.borderWidth = 2
         cell?.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
