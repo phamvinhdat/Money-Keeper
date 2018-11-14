@@ -142,9 +142,9 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let numberofCell = isExpense ? arrayExpense.count : arrayIncome.count
         if indexPath.row == numberofCell{
-            let sb = storyboard?.instantiateViewController(withIdentifier: "EditCategoryView")
-            //self.present(sb!, animated: true, completion: nil)
-            self.navigationController?.pushViewController(sb!, animated: true)
+            let sb = storyboard?.instantiateViewController(withIdentifier: "EditCategoryView") as! EditCategoryInputViewController
+            sb.isExpense = self.isExpense
+            self.navigationController?.pushViewController(sb, animated: true)
         }
     }
 }
