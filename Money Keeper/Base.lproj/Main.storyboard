@@ -275,7 +275,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zHi-Ik-BaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55.200000000000003" y="167.76611694152925"/>
+            <point key="canvasLocation" x="-470" y="902"/>
+        </scene>
+        <!--Edit Category Input View Controller-->
+        <scene sceneID="tXg-sF-bAS">
+            <objects>
+                <viewController storyboardIdentifier="EditCategoryView" id="pD3-hy-9sA" customClass="EditCategoryInputViewController" customModule="Money_Keeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e9W-GZ-cgV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4Ow-aE-E6i"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Zy-S6-7ir" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="303" y="902"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="j6s-qx-1Ah">
@@ -313,7 +328,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOk-uy-yap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804" y="168"/>
+            <point key="canvasLocation" x="-78" y="168"/>
         </scene>
     </scenes>
     <resources>
