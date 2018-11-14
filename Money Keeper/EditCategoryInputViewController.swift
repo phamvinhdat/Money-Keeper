@@ -31,7 +31,7 @@ class EditCategoryInputViewController: UIViewController {
     func setNavigationbar_viewDidLoad(){
         let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
         self.navigationItem.leftBarButtonItem = btLeft
-        let btRight = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: nil)
+        let btRight = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(btnEdit_tapped))
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
         self.navigationItem.rightBarButtonItem = btRight
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
