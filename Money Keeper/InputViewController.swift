@@ -25,8 +25,9 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
         arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
         setCellCategory_viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InputViewController.viewTapped(gestureRecognizer:)))
-        view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
     }
@@ -62,7 +63,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.text = dateFormat.string(from: DatePicker.date)
     }
     
-    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer){
+    @objc func viewTapped(){
         view.endEditing(true)
     }
     
@@ -86,8 +87,8 @@ class InputViewController: UIViewController, UITextFieldDelegate{
 extension InputViewController:UICollectionViewDataSource, UICollectionViewDelegate{
     
     func setCellCategory_viewDidLoad(){
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.delegate = self
+        self.categoryCollectionView.dataSource = self
+        self.categoryCollectionView.delegate = self
         let width = (self.view.frame.size.width - 36)/3
         let height = width*2/3
         let layout = categoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -139,9 +140,11 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell!.isSelected = true
-        cell!.layer.borderWidth = 2
-        cell?.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+        let numberofCell = isExpense ? arrayExpense.count : arrayIncome.count
+        if indexPath.row == numberofCell{
+            let sb = storyboard?.instantiateViewController(withIdentifier: "EditCategoryView")
+            //self.present(sb!, animated: true, completion: nil)
+            self.navigationController?.pushViewController(sb!, animated: true)
+        }
     }
 }

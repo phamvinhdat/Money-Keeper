@@ -12,8 +12,9 @@ class EditCategoryInputViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let root = self.navigationController?.viewControllers[0]
+        self.navigationItem.titleView = root!.navigationItem.titleView
+       
     }
 
 }

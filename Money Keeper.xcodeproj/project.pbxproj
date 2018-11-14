@@ -77,11 +77,11 @@
 				C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */,
 				C4D82C1221975C18006898D8 /* InputViewController.swift */,
 				C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */,
+				C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */,
 				C4D82C1421975C18006898D8 /* Main.storyboard */,
 				C4D82C1721975C1B006898D8 /* Assets.xcassets */,
 				C4D82C1921975C1B006898D8 /* LaunchScreen.storyboard */,
 				C4D82C1C21975C1B006898D8 /* Info.plist */,
-				C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */,
 			);
 			path = "Money Keeper";
 			sourceTree = "<group>";
