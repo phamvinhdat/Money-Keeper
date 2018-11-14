@@ -29,7 +29,7 @@ class EditCategoryInputViewController: UIViewController {
     }
 
     func setNavigationbar_viewDidLoad(){
-        let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_touchUpInside))
+        let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
         self.navigationItem.leftBarButtonItem = btLeft
         let btRight = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: nil)
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
@@ -44,9 +44,24 @@ class EditCategoryInputViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    @objc func btnBack_touchUpInside(){
+    @objc func btnBack_tapped(){
         self.navigationController?.popViewController(animated: true)
         root.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func btnEdit_tapped(){
+        self.categoryTable.isEditing = true
+        let btn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(btnSave_tapped))
+        self.navigationItem.rightBarButtonItem = btn
+    }
+    
+    @objc func btnSave_tapped(){
+        self.categoryTable.isEditing = false
+        let btRight = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(btnEdit_tapped))
+        self.navigationItem.rightBarButtonItem = btRight
+        
+        
+        self.categoryTable.reloadData()
     }
     
     @objc func segment_ValueChanged(){
