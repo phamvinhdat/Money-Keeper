@@ -10,6 +10,7 @@ import UIKit
 
 class EditCategoryInputViewController: UIViewController {
     
+    @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var categoryTable: UITableView!
     private var segment:UISegmentedControl = UISegmentedControl()
     var root:InputViewController!
@@ -21,6 +22,7 @@ class EditCategoryInputViewController: UIViewController {
         
         setCellCategory_viewDidLoad()
         setNavigationbar_viewDidLoad()
+        setAddButton_viewDidLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -28,6 +30,14 @@ class EditCategoryInputViewController: UIViewController {
         self.root.categoryCollectionView.reloadData()
     }
 
+    func setAddButton_viewDidLoad(){
+        self.btnAdd.tintColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+        self.btnAdd.layer.cornerRadius = self.btnAdd.frame.height/2
+        self.btnAdd.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        self.btnAdd.contentVerticalAlignment = .center
+        self.btnAdd.contentHorizontalAlignment = .center
+    }
+    
     func setNavigationbar_viewDidLoad(){
         let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
         self.navigationItem.leftBarButtonItem = btLeft
