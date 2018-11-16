@@ -525,14 +525,14 @@
             </objects>
             <point key="canvasLocation" x="776.79999999999995" y="901.79910044977521"/>
         </scene>
-        <!--Root Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="j6s-qx-1Ah">
             <objects>
-                <tabBarController id="Veg-LQ-nLd" customClass="RootTabBarController" customModule="Money_Keeper" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Veg-LQ-nLd" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NB6-iB-whF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="t6u-tw-kbi" kind="relationship" relationship="viewControllers" id="WeK-7Y-ZHP"/>
