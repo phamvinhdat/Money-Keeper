@@ -38,14 +38,17 @@ class EditCategoryInputViewController: UIViewController {
             if f.title == "Edit"{
                 f.title = "Done"
                 f.iconImageView.image = #imageLiteral(resourceName: "icons8-checked_checkbox_filled")
+                self.categoryTable.isEditing = true
             }else{
                 f.title = "Edit"
+                f.iconImageView.image = #imageLiteral(resourceName: "icons8-edit_file")
+                self.categoryTable.isEditing = false
             }
         }
         self.floaty.addItem("Save", icon: #imageLiteral(resourceName: "icons8-save")) { (_) in
             self.btnSave_tapped(delay: 3)
         }
-        self.floaty.addItem("New Category", icon: #imageLiteral(resourceName: "icons8-add_file_filled")) { (f) in
+        self.floaty.addItem("New Category", icon: #imageLiteral(resourceName: "icons8-add_file_filled")) { (_) in
             
         }
         
@@ -173,4 +176,22 @@ extension EditCategoryInputViewController: UITableViewDataSource, UITableViewDel
         }
         self.categoryTable.reloadData()
     }
+}
+
+class EditCategoryInputTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var imgLeft: UIImageView!
+    @IBOutlet weak var imgRight: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+    }
+    
 }
