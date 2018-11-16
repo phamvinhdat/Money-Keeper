@@ -16,14 +16,13 @@ class EditCategoryInputViewController: UIViewController {
     private var segment:UISegmentedControl = UISegmentedControl()
     var root:InputViewController!
     var isExpense:Bool!
-    var isSave:Bool!
-    var idCategoryDeleted = [Int]()
+    var isSave:Bool! = true
+    var categoryDeleted = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setFloaty_viewDidLoad()
         root = self.navigationController?.viewControllers[0] as? InputViewController
-        isSave = true
         
         setCellCategory_viewDidLoad()
         setNavigationbar_viewDidLoad()
@@ -35,11 +34,19 @@ class EditCategoryInputViewController: UIViewController {
     }
     
     func setFloaty_viewDidLoad(){
-        self.floaty.addItem("Edit", icon: #imageLiteral(resourceName: "icons8-edit_file")) { (_) in
-            self.btnEdit_tapped()
+        self.floaty.addItem("Edit", icon: #imageLiteral(resourceName: "icons8-edit_file")) { (f) in
+            if f.title == "Edit"{
+                f.title = "Done"
+                f.iconImageView.image = #imageLiteral(resourceName: "icons8-checked_checkbox_filled")
+            }else{
+                f.title = "Edit"
+            }
         }
         self.floaty.addItem("Save", icon: #imageLiteral(resourceName: "icons8-save")) { (_) in
-            self.btnSave_tapped()
+            self.btnSave_tapped(delay: 3)
+        }
+        self.floaty.addItem("New Category", icon: #imageLiteral(resourceName: "icons8-add_file_filled")) { (f) in
+            
         }
         
         self.view.addSubview(floaty)
@@ -59,15 +66,38 @@ class EditCategoryInputViewController: UIViewController {
     }
     
     @objc func btnBack_tapped(){
+        if !self.isSave{
+            let alert = UIAlertController(title: "", message: "Your changes have not been saved", preferredStyle: .alert)
+            let action1 = UIAlertAction(title: "Yes", style: .default) { (_) in
+                self.btnSave_tapped(delay: 0)
+                self.root.loadArrayExpense()
+                self.root.loadArrayIncome()
+                self.root.categoryCollectionView.reloadData()
+            }
+            let action2 = UIAlertAction(title: "No", style: .default, handler: nil)
+            alert.addAction(action1)
+            alert.addAction(action2)
+            
+            let screen = UIScreen.main
+            let screenBounds = screen.bounds
+            let alertWindow = UIWindow(frame: screenBounds)
+            alertWindow.windowLevel = UIWindow.Level.alert
+            
+            let vc = UIViewController()
+            alertWindow.rootViewController = vc
+            alertWindow.screen = screen
+            alertWindow.isHidden = false
+            vc.present(alert, animated: true)
+        }
+        //back
+        self.root.loadArrayExpense()
+        self.root.loadArrayIncome()
+        self.root.categoryCollectionView.reloadData()
         self.navigationController?.popViewController(animated: true)
         root.tabBarController?.tabBar.isHidden = false
     }
     
-    @objc func btnEdit_tapped(){
-        self.categoryTable.isEditing = true
-    }
-    
-    @objc func btnSave_tapped(){
+    func btnSave_tapped(delay: Double){
         if !self.isSave{
             self.isSave = !self.isSave
             self.categoryTable.isEditing = false
@@ -75,12 +105,19 @@ class EditCategoryInputViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
-            // change to desired number of seconds (in this case 5 seconds)
-            let when = DispatchTime.now() + 3
-            DispatchQueue.main.asyncAfter(deadline: when){
-                alert.dismiss(animated: true, completion: nil)
+            //update database
+            for i in categoryDeleted{
+                CategoryEntity.shared.remove(id: i)
             }
             
+            // change to desired number of seconds
+            if delay > 0
+            {
+                let when = DispatchTime.now() + delay
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: nil)
+                }
+            }
         }
     }
         
@@ -123,7 +160,7 @@ extension EditCategoryInputViewController: UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            self.isSave = !self.isSave
+            self.isSave = false
             var id:Int!
             if self.isExpense{
                 id = self.root.arrayExpense[indexPath.row].id
@@ -132,7 +169,7 @@ extension EditCategoryInputViewController: UITableViewDataSource, UITableViewDel
                 id = self.root.arrayIncome[indexPath.row].id
                 self.root.arrayIncome.remove(at: indexPath.row)
             }
-            self.idCategoryDeleted.append(id)
+            self.categoryDeleted.append(id)
         }
         self.categoryTable.reloadData()
     }

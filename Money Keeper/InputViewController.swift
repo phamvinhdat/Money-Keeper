@@ -22,8 +22,9 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
-        arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
+        
+        loadArrayIncome()
+        loadArrayExpense()
         setCellCategory_viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         tapGesture.cancelsTouchesInView = false
@@ -31,7 +32,15 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
     }
-
+    
+    func loadArrayExpense(){
+        arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
+    }
+    
+    func loadArrayIncome(){
+        arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
+    }
+    
     @IBAction func expense_selectorChange(_ sender: Any) {
         //flip the boolean
         self.isExpense = !self.isExpense

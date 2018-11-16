@@ -240,6 +240,117 @@ class CategoryEntity{
 
         return tblCategory
     }
+    
+    func update(ID: Int, _ property: IntProperty, value: Int) -> Bool{
+        var SQL: String!
+        
+        switch property{
+        case .IDIcon:
+            SQL = """
+                  UPDATE CATEGORY
+                  SET IDICON = ?
+                  WHERE ID = ?
+                  """
+            break
+        case .kind:
+            SQL = """
+                  UPDATE CATEGORY
+                  SET KIND = ?
+                  WHERE ID = ?
+                  """
+            break
+        case .parentCategory:
+            SQL = """
+                  UPDATE CATEGORY
+                  SET PARENTCATEGORY = ?
+                  WHERE ID = ?
+                  """
+            break
+        }
+        
+        guard let updateStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
+            print("CATEGORY: update prepare statement fail.")
+            return false
+        }
+        defer{
+            sqlite3_finalize(updateStatement)
+        }
+        
+        guard sqlite3_bind_int(updateStatement, 1, Int32(value)) == SQLITE_OK && sqlite3_bind_int(updateStatement, 2, Int32(ID)) == SQLITE_OK
+            else{
+                print("CATEGORY: update bind fail.")
+                return false
+        }
+        
+        guard sqlite3_step(updateStatement) == SQLITE_ROW
+            else{
+                print("CATEGORY: update step fail.")
+                return false
+        }
+        
+        print("CATEGORY: Update successfully.")
+        return true
+    }
+    
+    func update(ID: Int, NAME: String) -> Bool{
+        var SQL = """
+                  UPDATE CATEGORY
+                  SET NAME = ?
+                  WHERE ID = ?
+                  """
+        
+        guard let updateStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
+            print("CATEGORY: update prepare statement fail.")
+            return false
+        }
+        defer{
+            sqlite3_finalize(updateStatement)
+        }
+        
+        let name = NAME as NSString
+        guard sqlite3_bind_text(updateStatement, 1, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(updateStatement, 2, Int32(ID)) == SQLITE_OK
+            else{
+                print("CATEGORY: update bind fail.")
+                return false
+        }
+        
+        guard sqlite3_step(updateStatement) == SQLITE_ROW
+            else{
+                print("CATEGORY: update step fail.")
+                return false
+        }
+        
+        print("CATEGORY: Update successfully.")
+        return true
+    }
+    
+    func remove(id: Int) -> Bool{
+        let SQL = """
+                  DELETE FROM CATEGORY
+                  WHERE ID = ?
+                  """
+        guard let removeStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("CATEGORY: remove prepare statement fail.")
+                return false
+        }
+        defer{
+            sqlite3_finalize(removeStatement)
+        }
+        
+        guard sqlite3_bind_int(removeStatement, 1, Int32(id)) == SQLITE_OK
+            else{
+                print("CATEGORY: remove bind fail.")
+                return false
+        }
+        
+        guard sqlite3_step(removeStatement) == SQLITE_DONE else{
+            print("CATEGORY: remove step fail.")
+            return false
+        }
+        print("CATEGORY remove successfully.")
+        return true
+    }
 }
 
 class Category{
