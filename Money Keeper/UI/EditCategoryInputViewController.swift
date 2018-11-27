@@ -11,14 +11,18 @@ import Floaty
 
 class EditCategoryInputViewController: UIViewController {
     
+    //MASK: outlet
     @IBOutlet weak var floaty: Floaty!
     @IBOutlet weak var categoryTable: UITableView!
+    
+    //MASK: variable
     private var segment:UISegmentedControl = UISegmentedControl()
     var root:InputViewController!
     var isExpense:Bool!
     var isSave:Bool! = true
     var categoryDeleted = [Int]()
     
+    //MASK: load
     override func viewDidLoad() {
         super.viewDidLoad()
         setFloaty_viewDidLoad()
@@ -33,6 +37,10 @@ class EditCategoryInputViewController: UIViewController {
         self.root.categoryCollectionView.reloadData()
     }
     
+    //MASK: action
+    
+    
+    //MASK: todo
     func setFloaty_viewDidLoad(){
         self.floaty.addItem("Edit", icon: #imageLiteral(resourceName: "icons8-edit_file")) { (f) in
             if f.title == "Edit"{
@@ -48,8 +56,13 @@ class EditCategoryInputViewController: UIViewController {
         self.floaty.addItem("Save", icon: #imageLiteral(resourceName: "icons8-save")) { (_) in
             self.btnSave_tapped(delay: 3)
         }
+        
         self.floaty.addItem("New Category", icon: #imageLiteral(resourceName: "icons8-add_file_filled")) { (_) in
+            let sb = self.storyboard?.instantiateViewController(withIdentifier: "NewAndEditCategory") as! NewAndEditCategoryViewController
             
+            sb.strTitle = "New Category"
+            
+            self.navigationController?.pushViewController(sb, animated: true)
         }
         
         self.view.addSubview(floaty)
@@ -186,12 +199,10 @@ class EditCategoryInputTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
 }

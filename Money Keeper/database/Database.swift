@@ -14,9 +14,9 @@ class Database{
     private let databaseFilename = "MonneyKeeper.sqlite3"
     
     private init(){
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first as String!
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first as! String
         do{
-            connection = try SQLiteDatabase.open(path: "\(path!)/\(databaseFilename)")
+            connection = try SQLiteDatabase.open(path: "\(path)/\(databaseFilename)")
             print("Open database successfully.")
         }catch{
             print("cannot open data.")

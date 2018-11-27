@@ -10,16 +10,20 @@ import UIKit
 
 class InputViewController: UIViewController, UITextFieldDelegate{
     
+    //MASK: Variable
     private var datePicker: UIDatePicker?
     var arrayExpense = [Category]()
     var arrayIncome = [Category]()
     var isExpense:Bool = true
+    
+    //MASK: outlet
     @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var txtNote: UITextField!
     @IBOutlet weak var txtExpenseIncome: UITextField!
     @IBOutlet weak var txtDate: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
+    //MASK: load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +45,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
     }
     
+    //MASK: Action
     @IBAction func expense_selectorChange(_ sender: Any) {
         //flip the boolean
         self.isExpense = !self.isExpense
@@ -66,6 +71,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.text = dateFormat.string(from: datePicker!.date)
     }
     
+    //MASK: todo
     @objc func dateChanged(DatePicker: UIDatePicker){
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "EEEE, yyyy/MM/dd"

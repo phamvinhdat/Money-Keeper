@@ -14,6 +14,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override var isSelected: Bool{
         didSet{
             if isSelected{
