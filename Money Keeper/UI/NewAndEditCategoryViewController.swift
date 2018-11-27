@@ -14,29 +14,69 @@ class NewAndEditCategoryViewController: UIViewController{
     @IBOutlet weak var myIconColectionView: UICollectionView!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var CategoryIconCollection: UICollectionView!
+    @IBOutlet weak var lblParentCategory: UILabel!
+    @IBOutlet weak var viewParentCategory: UIView!
     
     //var
     var strTitle:String!
+    var parentCategory: Category? = nil
     
     //MASK: Load
     override func viewDidLoad() {
         super.viewDidLoad()
         setCellIcon_viewDidLoad()
         setNavigationbar_viewDidLoad()
+        
+        //add action for Parentcategoryview
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(viewParentCategory_tapped(_:)))
+        viewParentCategory.addGestureRecognizer(gesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let parent = self.parentCategory{
+            self.lblParentCategory.text = parent.name
+        }else{
+            self.lblParentCategory.text = "No item"
+        }
     }
     
     func setNavigationbar_viewDidLoad(){
-        let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
+        let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-music"), style: .plain, target: self, action: #selector(cancel_tapped))
+        let btRight = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save_tapped))
         self.navigationItem.title = self.strTitle
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2669004202, green: 0.9800816178, blue: 0.4496235847, alpha: 1)]
         self.navigationItem.leftBarButtonItem = btLeft
+        self.navigationItem.rightBarButtonItem = btRight
         self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2669004202, green: 0.9800816178, blue: 0.4496235847, alpha: 1)
     }
     
-    @objc func btnBack_tapped(){
+    @objc func viewParentCategory_tapped(_ sender: UITapGestureRecognizer){
+        let sb = self.storyboard?.instantiateViewController(withIdentifier: "ParentTableView") as! ParentCategoryViewController
+        
+        //set isExpense
+        let SPACE = " "
+        let strKind = self.strTitle.components(separatedBy: SPACE)[1]
+        
+        if strKind.lowercased() == "expense"{
+            sb.isExpense = true
+        }else{
+            sb.isExpense = false
+        }
+        self.navigationController?.pushViewController(sb, animated: true)
+    }
+    
+    @objc func save_tapped(){
+        
+    }
+    
+    @objc func cancel_tapped(){
         
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
 }
 
 extension NewAndEditCategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -67,8 +107,6 @@ extension NewAndEditCategoryViewController: UICollectionViewDelegate, UICollecti
         
         return cell
     }
-    
-    
 }
 
 class IconNewAndEditCategoryCollectionViewCell:UICollectionViewCell{

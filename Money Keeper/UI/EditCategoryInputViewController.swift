@@ -57,11 +57,16 @@ class EditCategoryInputViewController: UIViewController {
             self.btnSave_tapped(delay: 3)
         }
         
+        //new category
         self.floaty.addItem("New Category", icon: #imageLiteral(resourceName: "icons8-add_file_filled")) { (_) in
             let sb = self.storyboard?.instantiateViewController(withIdentifier: "NewAndEditCategory") as! NewAndEditCategoryViewController
             
-            sb.strTitle = "New Category"
-            
+            //set title for table category view
+            if self.isExpense{
+                sb.strTitle = "New Expense"
+            }else{
+                sb.strTitle = "New Income"
+            }
             self.navigationController?.pushViewController(sb, animated: true)
         }
         
@@ -83,7 +88,7 @@ class EditCategoryInputViewController: UIViewController {
     
     @objc func btnBack_tapped(){
         if !self.isSave{
-            let alert = UIAlertController(title: "", message: "Your changes have not been saved", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Your changes have not been saved", message: "Do you want to save the changes?", preferredStyle: .alert)
             let action1 = UIAlertAction(title: "Yes", style: .default) { (_) in
                 self.btnSave_tapped(delay: 0)
                 self.root.loadArrayExpense()
@@ -117,7 +122,7 @@ class EditCategoryInputViewController: UIViewController {
         if !self.isSave{
             self.isSave = !self.isSave
             self.categoryTable.isEditing = false
-            let alert = UIAlertController(title: "", message: "Your changes have been saved", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: "Your changes have been saved", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
