@@ -293,11 +293,18 @@ class CategoryEntity{
 }
 
 class Category{
-    var id = Int()
-    var name = String()
-    var idIcon = Int()
-    var parentCategory = Int()
+    var id:Int
+    var name:String
+    var idIcon:Int
+    var parentCategory:Int
     var kind = Kind.income
+    
+    init() {
+        id = Int()
+        name = String()
+        idIcon = Int()
+        parentCategory = Int()
+    }
 }
 
 enum Kind: Int{
