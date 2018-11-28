@@ -11,8 +11,7 @@ import Foundation
 class CategoryEntity{
     static let shared = CategoryEntity()
     
-    private init(){
-        let SQL = """
+    private let CREATETABLE = """
                   CREATE TABLE CATEGORY (
                   ID INT PRIMARY KEY,
                   NAME VARCHAR(500) NOT NULL,
@@ -23,16 +22,13 @@ class CategoryEntity{
                   FOREIGN KEY (PARENTCATEGORY) REFERENCES CATEGORY(ID)
                   )
                   """
-        
+    
+    private init(){
+        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+    }
+    
+    private func defaultInsert(){
         do{
-            let statement = try Database.shared.connection?.prepareStatement(SQL: SQL)
-            guard sqlite3_step(statement) == SQLITE_DONE
-                else{
-                    print("CATEGORY: Create table step error.")
-                    return
-            }
-            print("CATEGORY table created.")
-            //insert value default
             try insert(ID: 1, NAME: "Education", IDICON: 25, PARENTCATEGORY: 0, KIND: .expense)
             try insert(ID: 2, NAME: "Tuition fee", IDICON: 43, PARENTCATEGORY: 1, KIND: .expense)
             try insert(ID: 3, NAME: "Book", IDICON: 48, PARENTCATEGORY: 48, KIND: .expense)
@@ -57,11 +53,9 @@ class CategoryEntity{
             try insert(ID: 22, NAME: "Bonus", IDICON: 57, PARENTCATEGORY: 0, KIND: .income)
             try insert(ID: 23, NAME: "Awarded", IDICON: 58, PARENTCATEGORY: 0, KIND: .income)
             try insert(ID: 24, NAME: "Other", IDICON: 4, PARENTCATEGORY: 0, KIND: .income)
-            
         }catch{
-            print("CATEGORY: Prepare statement error.")
+            print("CATEGORY: Fail inserted row.")
         }
-        
     }
     
     //PARENTCATEGORY: 0_root
@@ -89,51 +83,17 @@ class CategoryEntity{
     }
     
     func count() -> Int{
-        let SQL = """
-                  SELECT COUNT()
-                  FROM CATEGORY
-                  """
-        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                print("CATEGORY: Count prepare statement fail.")
-                return 0
+        if let count = Database.shared.connection?.count("CATEGORY", nil){
+            return count
         }
-        defer{
-            sqlite3_finalize(queryStatement)
-        }
-        
-        guard sqlite3_step(queryStatement) == SQLITE_ROW
-            else{
-                print("CATEGORY: Count step fail.")
-                return 0
-        }
-        return Int(sqlite3_column_int(queryStatement, 0))
+        return 0
     }
     
     func count(KIND: Kind) -> Int{
-        let SQL = "SELECT COUNT() FROM CATEGORY C WHERE C.KIND = ?"
-        
-        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                print("CATEGORY: Count prepare statement fail.")
-                return 0;
+        if let count = Database.shared.connection?.count("CATEGORY",  "KIND = \(KIND.rawValue)"){
+            return count
         }
-        defer{
-            sqlite3_finalize(queryStatement)
-        }
-        
-        guard sqlite3_bind_int(queryStatement, 1, Int32(KIND.rawValue)) == SQLITE_OK
-            else{
-                print("CATEGORY: Count bind fail.")
-                return 0;
-        }
-        
-        guard sqlite3_step(queryStatement) == SQLITE_ROW
-            else{
-                print("CATEGORY: Count step fail.")
-                return 0
-        }
-        return Int(sqlite3_column_int(queryStatement, 0))
+        return 0
     }
     
     func getName(ID: Int)->String?{
@@ -325,31 +285,10 @@ class CategoryEntity{
     }
     
     func remove(id: Int) -> Bool{
-        let SQL = """
-                  DELETE FROM CATEGORY
-                  WHERE ID = ?
-                  """
-        guard let removeStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                print("CATEGORY: remove prepare statement fail.")
-                return false
+        if let r = Database.shared.connection?.remove("CATEGORY", id: id){
+            return r
         }
-        defer{
-            sqlite3_finalize(removeStatement)
-        }
-        
-        guard sqlite3_bind_int(removeStatement, 1, Int32(id)) == SQLITE_OK
-            else{
-                print("CATEGORY: remove bind fail.")
-                return false
-        }
-        
-        guard sqlite3_step(removeStatement) == SQLITE_DONE else{
-            print("CATEGORY: remove step fail.")
-            return false
-        }
-        print("CATEGORY remove successfully.")
-        return true
+        return false
     }
 }
 

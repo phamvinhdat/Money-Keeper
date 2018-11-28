@@ -22,6 +22,8 @@
 		C4D82C2F219821C1006898D8 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C2E219821C1006898D8 /* Database.swift */; };
 		C4D82C3121982839006898D8 /* IconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C3021982839006898D8 /* IconEntity.swift */; };
 		C4D82C3321987706006898D8 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C3221987706006898D8 /* CategoryEntity.swift */; };
+		C4F8354C21AE83430002BE2F /* HistoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8354B21AE83430002BE2F /* HistoryEntity.swift */; };
+		C4F8354E21AEAC0E0002BE2F /* WalletEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F8354D21AEAC0E0002BE2F /* WalletEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		C4D82C2E219821C1006898D8 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		C4D82C3021982839006898D8 /* IconEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconEntity.swift; sourceTree = "<group>"; };
 		C4D82C3221987706006898D8 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
+		C4F8354B21AE83430002BE2F /* HistoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntity.swift; sourceTree = "<group>"; };
+		C4F8354D21AEAC0E0002BE2F /* WalletEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEntity.swift; sourceTree = "<group>"; };
 		DBB5D5C158C1A78FEFF84745 /* Pods-Money Keeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Money Keeper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Money Keeper/Pods-Money Keeper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +133,8 @@
 				C4D82C2E219821C1006898D8 /* Database.swift */,
 				C4D82C3021982839006898D8 /* IconEntity.swift */,
 				C4D82C3221987706006898D8 /* CategoryEntity.swift */,
+				C4F8354B21AE83430002BE2F /* HistoryEntity.swift */,
+				C4F8354D21AEAC0E0002BE2F /* WalletEntity.swift */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -266,6 +272,8 @@
 				C4D82C3121982839006898D8 /* IconEntity.swift in Sources */,
 				C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */,
 				C4A6C49521AD4496006C5968 /* ParentCategoryViewController.swift in Sources */,
+				C4F8354E21AEAC0E0002BE2F /* WalletEntity.swift in Sources */,
+				C4F8354C21AE83430002BE2F /* HistoryEntity.swift in Sources */,
 				C4D82C3321987706006898D8 /* CategoryEntity.swift in Sources */,
 				C45154FD219BFDCB00D9C5DB /* EditCategoryInputViewController.swift in Sources */,
 				C4D82C292197E76A006898D8 /* CategoryCollectionViewCell.swift in Sources */,

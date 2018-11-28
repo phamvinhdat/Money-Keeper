@@ -11,23 +11,19 @@ import Foundation
 class IconEntity{
     static let shared = IconEntity()
 
+    private let CREATETABLE = """
+                      CREATE TABLE ICON (
+                      ID INT PRIMARY KEY,
+                      NAME VARCHAR(255) NOT NULL
+                      )
+                      """
+    
     private init(){
-        let SQL = """
-                  CREATE TABLE ICON (
-                  ID INT PRIMARY KEY,
-                  NAME VARCHAR(255) NOT NULL
-                  )
-                  """
-        
+        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+    }
+    
+    private func defaultInsert(){
         do{
-            let statement = try Database.shared.connection?.prepareStatement(SQL: SQL)
-            guard sqlite3_step(statement) == SQLITE_DONE
-                else{
-                    print("ICON: Create table step error.")
-                return
-            }
-            print("ICON table created.")
-            //insert value
             try insert(ID: 1, NAME: "icons8-school_building")
             try insert(ID: 2, NAME: "acoustic-guitar")
             try insert(ID: 3, NAME: "alarm-clock")
@@ -87,9 +83,8 @@ class IconEntity{
             try insert(ID: 57, NAME: "bonus")
             try insert(ID: 58, NAME: "trophy")
         }catch{
-            print("Prepare statement error.")
+            print("ICON: Fail inserted row.")
         }
-        
     }
     
     func getName(ID: Int)->String?{
@@ -146,23 +141,9 @@ class IconEntity{
     }
     
     func count() -> Int{
-        let SQL = """
-                  SELECT COUNT()
-                  FROM ICON
-                  """
-        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                return 0
+        if let count = Database.shared.connection?.count("ICON", nil){
+            return count
         }
-        defer{
-            sqlite3_finalize(queryStatement)
-        }
-  
-        guard sqlite3_step(queryStatement) == SQLITE_ROW
-            else{
-                return 0
-        }
-        
-        return Int(sqlite3_column_int(queryStatement, 0))
+        return 0
     }
 }

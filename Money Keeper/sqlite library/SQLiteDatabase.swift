@@ -58,6 +58,78 @@ class SQLiteDatabase{
         return statement
     }
     
+    func CreateTable(SQL: String, Complete: (()->Void)?){
+        do{
+            let statement = try prepareStatement(SQL: SQL)
+            guard sqlite3_step(statement) == SQLITE_DONE
+                else{
+                    print("\(SQL): Create table step error.")
+                    return
+            }
+            //run complete
+            if let run = Complete{
+                run()
+            }
+            print("\(SQL): table created.")
+        }catch{
+            print("\(SQL): Prepare statement error.")
+        }
+    }
+    
+    func count(_ tableName: String, _ WHERE: String?) -> Int{
+        var SQL = """
+                  SELECT COUNT()
+                  FROM \(tableName)
+                  """
+        
+        if let wh = WHERE{
+            SQL.append("\nWHERE \(wh)")
+        }
+        
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("\(tableName): Count prepare statement fail.")
+                return 0
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_step(queryStatement) == SQLITE_ROW
+            else{
+                print("\(tableName): Count step fail.")
+                return 0
+        }
+        return Int(sqlite3_column_int(queryStatement, 0))
+    }
+    
+    func remove(_ tableName: String, id: Int) -> Bool{
+        let SQL = """
+                  DELETE FROM \(tableName)
+                  WHERE ID = ?
+                  """
+        guard let removeStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("\(tableName): remove prepare statement fail.")
+                return false
+        }
+        defer{
+            sqlite3_finalize(removeStatement)
+        }
+        
+        guard sqlite3_bind_int(removeStatement, 1, Int32(id)) == SQLITE_OK
+            else{
+                print("\(tableName): remove bind fail.")
+                return false
+        }
+        
+        guard sqlite3_step(removeStatement) == SQLITE_DONE else{
+            print("\(tableName): remove step fail.")
+            return false
+        }
+        print("\(tableName): remove successfully.")
+        return true
+    }
     
 }
 
