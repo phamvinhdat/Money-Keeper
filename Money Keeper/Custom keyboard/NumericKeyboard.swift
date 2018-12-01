@@ -34,7 +34,7 @@ class NumericKeyboard: UIView {
     @IBOutlet weak var buttonKey7: UIButton!
     @IBOutlet weak var buttonKey8: UIButton!
     @IBOutlet weak var buttonKey9: UIButton!
-    @IBOutlet weak var buttonKey000: UIButton!
+    @IBOutlet weak var buttonKeyDone: UIButton!
     
     // backspace
     @IBOutlet weak var buttonKeyBackspace: UIButton!
@@ -49,7 +49,7 @@ class NumericKeyboard: UIView {
     @IBOutlet weak var buttonKeyEqual: UIButton!
     
     // all button outlets
-    var allButtons: [UIButton] { return [buttonKey0, buttonKey1, buttonKey2, buttonKey3, buttonKey4, buttonKey5, buttonKey6, buttonKey7, buttonKey8, buttonKey9, buttonKey000, buttonKeyPlus, buttonKeyEqual, buttonKeyMinus, buttonKeyPoint, buttonKeyDevide, buttonKeyMultiply, buttonKeyBackspace] }
+    var allButtons: [UIButton] { return [buttonKey0, buttonKey1, buttonKey2, buttonKey3, buttonKey4, buttonKey5, buttonKey6, buttonKey7, buttonKey8, buttonKey9, buttonKeyDone, buttonKeyPlus, buttonKeyEqual, buttonKeyMinus, buttonKeyPoint, buttonKeyDevide, buttonKeyMultiply, buttonKeyBackspace] }
     
     // data
     weak var delegate: NumericKeyboardDelegate?
@@ -96,9 +96,8 @@ class NumericKeyboard: UIView {
     }
     
     @IBAction func handlePressed(_ sender: UIButton) {
-        if let symbol = sender.titleLabel?.text, symbol.characters.count > 0 {
-            self.delegate?.numericHandlePressed(symbol: symbol)
-        }
+        let symbol = sender.titleLabel?.text ?? ""
+        self.delegate?.numericHandlePressed(symbol: symbol)
     }
     
     @IBAction func symbolWasPressed(_ sender: UIButton) {

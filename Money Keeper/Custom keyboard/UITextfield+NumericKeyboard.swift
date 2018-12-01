@@ -10,7 +10,7 @@ import UIKit
 
 private var numericKeyboardDelegate: NumericKeyboardDelegate? = nil
 
-extension UITextField: NumericKeyboardDelegate {
+extension UITextField: NumericKeyboardDelegate{
     // MARK: - Public methods to set or unset this uitextfield as NumericKeyboard.
     
     func setAsNumericKeyboard(delegate: NumericKeyboardDelegate?) {
@@ -39,32 +39,66 @@ extension UITextField: NumericKeyboardDelegate {
     }
     
     internal func numericHandlePressed(symbol: String) {
-        if var text = self.text, text.characters.count > 0 {
-            _ = text.remove(at: text.index(before: text.endIndex))
-            self.text = text
+        if symbol == "Done"{
+            self.endEditing(true)
+            print("done")
+        }
+        if var text = self.text , text.characters.count > 0 {
+            if symbol == "C"{
+                self.text = ""
+            }else if symbol == "="{
+                
+            }else{//is backspace
+                _ = text.remove(at: text.index(before: text.endIndex))
+                self.text = text
+            }
         }
         numericKeyboardDelegate?.numericHandlePressed(symbol: symbol)
     }
     
     internal func numericSymbolPressed(symbol: String){
-        let sym = symbol.first
-        guard self.text?.last != sym else{
-            return
-        }
         
+        if var text = self.text, text.characters.count > 0 {
+            let sym = symbol.first
+            let lastCh = text.last
+            
+            guard lastCh != sym else{
+                return
+            }
+            
+            if sym == "." && self.text?.isHavePointInLastNumber() == true{
+                return
+            }
+            
+            if lastCh?.isOperator() == true{
+                _ = text.remove(at: text.index(before: text.endIndex))
+                self.text = text
+            }
+            self.text?.append(symbol)
+        }
         numericKeyboardDelegate?.numericSymbolPressed(symbol: symbol)
     }
 }
 
-extension String{
+extension Character{
     func isOperator()->Bool{
-        guard self.lowercased() != "+" && self.lowercased() != "-" && self.lowercased() != "x" && self.lowercased() != "/" else{
+        guard self != "+" && self != "-" && self != "x" && self != "/" else{
             return true
         }
         return false
     }
-    
-    func isHavePointInNumber(){
-        
+}
+
+extension String{
+
+    func isHavePointInLastNumber()->Bool{
+        var str = self
+        while str.isEmpty == false && str.last?.isOperator() == false{
+            if str.last == "."{
+                return true
+            }
+            _ = str.popLast()
+        }
+        return false
     }
 }
