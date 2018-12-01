@@ -19,7 +19,11 @@ class IconEntity{
                       """
     
     private init(){
-        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+        do {
+            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+        }catch let er{
+            print(er)
+        }
     }
     
     private func defaultInsert(){
@@ -82,8 +86,8 @@ class IconEntity{
             try insert(ID: 56, NAME: "discount")
             try insert(ID: 57, NAME: "bonus")
             try insert(ID: 58, NAME: "trophy")
-        }catch{
-            print("ICON: Fail inserted row.")
+        }catch let er{
+            print(er)
         }
     }
     
@@ -93,29 +97,36 @@ class IconEntity{
                   FROM ICON
                   WHERE ID = ?
                   """
-        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                return nil
-        }
-        defer{
-            sqlite3_finalize(queryStatement)
-        }
         
-       guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK
-        else{
+        do{
+            let queryStatement = try Database.shared.connection?.prepareStatement(SQL: SQL)
+            
+            defer{
+                sqlite3_finalize(queryStatement)
+            }
+            
+            guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK else{
+                print(Database.shared.connection!.errorMessage)
+                return nil
+            }
+            
+            guard sqlite3_step(queryStatement) == SQLITE_ROW else{
+                print(Database.shared.connection!.errorMessage)
+                return nil
+            }
+            
+            guard let queryResult = sqlite3_column_text(queryStatement, 0) else{
+                print(Database.shared.connection!.errorMessage)
+                return nil
+            }
+            let result = String(cString: queryResult) as  String
+            
+            return result
+            
+        }catch let er{
+            print(er)
             return nil
         }
-        
-        guard sqlite3_step(queryStatement) == SQLITE_ROW
-            else{
-                return nil
-        }
-        
-        guard let queryResult = sqlite3_column_text(queryStatement, 0) else{
-            return nil
-        }
-        let result = String(cString: queryResult) as  String
-        return result
     }
     
     func insert(ID: Int, NAME: String) throws{
@@ -131,19 +142,22 @@ class IconEntity{
             
         guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK
             else{
-                throw SQLiteError.Bind(message: "ICON: Bind error")
+                throw SQLiteError.Bind(message: Database.shared.connection!.errorMessage)
         }
             
         guard sqlite3_step(insertStatement) == SQLITE_DONE else{
-            throw SQLiteError.Step(message: "ICON: Insert step error")
+            throw SQLiteError.Step(message: Database.shared.connection!.errorMessage)
         }
         print("ICON: Successfully inserted row.")
     }
     
     func count() -> Int{
-        if let count = Database.shared.connection?.count("ICON", nil){
-            return count
+        do {
+            let count = try Database.shared.connection?.count("ICON", nil)
+            return count ?? 0
+        }catch let er{
+            print(er)
+            return 0
         }
-        return 0
     }
 }

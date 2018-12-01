@@ -20,7 +20,7 @@ class SQLiteDatabase{
         sqlite3_close(dbPointer)
     }
     
-    fileprivate var errorMessage: String {
+    var errorMessage: String {
         if let errorPointer = sqlite3_errmsg(dbPointer) {
             let errorMessage = String(cString: errorPointer)
             return errorMessage
@@ -30,7 +30,7 @@ class SQLiteDatabase{
     }
     
     //open database if not exists then create database
-    static func open(path: String)throws ->SQLiteDatabase{
+    static func open(path: String) throws ->SQLiteDatabase{
         var db:OpaquePointer? = nil
         if sqlite3_open(path, &db) == SQLITE_OK{
             return SQLiteDatabase(dbPointer: db)
@@ -58,13 +58,12 @@ class SQLiteDatabase{
         return statement
     }
     
-    func CreateTable(SQL: String, Complete: (()->Void)?){
+    func CreateTable(SQL: String, Complete: (()->Void)?) throws{
         do{
             let statement = try prepareStatement(SQL: SQL)
             guard sqlite3_step(statement) == SQLITE_DONE
                 else{
-                    print("\(SQL): Create table step error.")
-                    return
+                    throw SQLiteError.Step(message: errorMessage)
             }
             //run complete
             if let run = Complete{
@@ -72,11 +71,11 @@ class SQLiteDatabase{
             }
             print("\(SQL): table created.")
         }catch{
-            print("\(SQL): Prepare statement error.")
+            throw SQLiteError.Prepare(message: errorMessage)
         }
     }
     
-    func count(_ tableName: String, _ WHERE: String?) -> Int{
+    func count(_ tableName: String, _ WHERE: String?) throws -> Int{
         var SQL = """
                   SELECT COUNT()
                   FROM \(tableName)
@@ -86,49 +85,41 @@ class SQLiteDatabase{
             SQL.append("\nWHERE \(wh)")
         }
         
-        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
-            else{
-                print("\(tableName): Count prepare statement fail.")
-                return 0
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
+            throw SQLiteError.Prepare(message: errorMessage)
         }
         defer{
             sqlite3_finalize(queryStatement)
         }
         
-        guard sqlite3_step(queryStatement) == SQLITE_ROW
-            else{
-                print("\(tableName): Count step fail.")
-                return 0
+        guard sqlite3_step(queryStatement) == SQLITE_ROW else{
+            throw SQLiteError.Step(message: errorMessage)
         }
+        
         return Int(sqlite3_column_int(queryStatement, 0))
     }
     
-    func remove(_ tableName: String, id: Int) -> Bool{
+    func remove(_ tableName: String, id: Int) throws{
         let SQL = """
                   DELETE FROM \(tableName)
                   WHERE ID = ?
                   """
         guard let removeStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
             else{
-                print("\(tableName): remove prepare statement fail.")
-                return false
+                throw SQLiteError.Prepare(message: errorMessage)
         }
         defer{
             sqlite3_finalize(removeStatement)
         }
         
-        guard sqlite3_bind_int(removeStatement, 1, Int32(id)) == SQLITE_OK
-            else{
-                print("\(tableName): remove bind fail.")
-                return false
+        guard sqlite3_bind_int(removeStatement, 1, Int32(id)) == SQLITE_OK else{
+                throw SQLiteError.Bind(message: errorMessage)
         }
         
         guard sqlite3_step(removeStatement) == SQLITE_DONE else{
-            print("\(tableName): remove step fail.")
-            return false
+            throw SQLiteError.Step(message: errorMessage)
         }
         print("\(tableName): remove successfully.")
-        return true
     }
     
 }

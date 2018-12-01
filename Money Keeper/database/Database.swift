@@ -17,9 +17,8 @@ class Database{
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first as! String
         do{
             connection = try SQLiteDatabase.open(path: "\(path)/\(databaseFilename)")
-            print("Open database successfully.")
-        }catch{
-            print("cannot open data.")
+        }catch let er{
+            print(er)
         }
     }
 

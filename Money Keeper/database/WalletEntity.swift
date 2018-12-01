@@ -22,7 +22,11 @@ class WalletEntity{
                   """
     
     private init(){
-        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: nil)
+        do {
+            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: nil)
+        }catch let er{
+            print(er)
+        }
     }
     
     private func defaultInsert(){
@@ -46,27 +50,32 @@ class WalletEntity{
         
         guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 3, Int32(IDICON)) == SQLITE_OK && sqlite3_bind_double(insertStatement, 4, BALANCE) == SQLITE_OK
             else{
-                throw SQLiteError.Bind(message: "WALLET: Bind error")
+                throw SQLiteError.Bind(message: Database.shared.connection!.errorMessage)
         }
         
         guard sqlite3_step(insertStatement) == SQLITE_DONE else{
-            throw SQLiteError.Step(message: "WALLET: Insert step error")
+            throw SQLiteError.Step(message: Database.shared.connection!.errorMessage)
         }
         print("WALLET: Successfully inserted row.")
     }
     
     func count() -> Int{
-        if let count = Database.shared.connection?.count("WALLET", nil){
-            return count
+        do {
+            let count = try Database.shared.connection?.count("WALLET", nil)
+            return count ?? 0
+        }catch let er{
+            print(er)
+            return 0
         }
-        return 0
     }
     
     func remove(id: Int) -> Bool{
-        if let r = Database.shared.connection?.remove("WALLET", id: id){
-            return r
+        do{
+            try Database.shared.connection?.remove("WALLET", id: id)
+            return true
+        }catch let er{
+            print(er)
+            return false
         }
-        return false
     }
-    
 }

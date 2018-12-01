@@ -71,12 +71,18 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.text = dateFormat.string(from: datePicker!.date)
     }
     
+    @IBAction func btnSubmit(_ sender: Any) {
+        
+    }
+    
     //MASK: todo
     @objc func dateChanged(DatePicker: UIDatePicker){
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
         txtDate.text = dateFormat.string(from: DatePicker.date)
     }
+    
+    
     
     @objc func viewTapped(){
         view.endEditing(true)

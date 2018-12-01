@@ -24,7 +24,11 @@ class CategoryEntity{
                   """
     
     private init(){
-        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+        do{
+            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
+        }catch let er{
+            print(er)
+        }
     }
     
     private func defaultInsert(){
@@ -53,8 +57,8 @@ class CategoryEntity{
             try insert(ID: 22, NAME: "Bonus", IDICON: 57, PARENTCATEGORY: 0, KIND: .income)
             try insert(ID: 23, NAME: "Awarded", IDICON: 58, PARENTCATEGORY: 0, KIND: .income)
             try insert(ID: 24, NAME: "Other", IDICON: 4, PARENTCATEGORY: 0, KIND: .income)
-        }catch{
-            print("CATEGORY: Fail inserted row.")
+        }catch let er{
+            print(er)
         }
     }
     
@@ -83,17 +87,23 @@ class CategoryEntity{
     }
     
     func count() -> Int{
-        if let count = Database.shared.connection?.count("CATEGORY", nil){
-            return count
+        do {
+            let count = try Database.shared.connection?.count("CATEGORY", nil)
+            return count ?? 0
+        }catch let er{
+            print(er)
+            return 0
         }
-        return 0
     }
     
     func count(KIND: Kind) -> Int{
-        if let count = Database.shared.connection?.count("CATEGORY",  "KIND = \(KIND.rawValue)"){
-            return count
+        do {
+            let count = try Database.shared.connection?.count("CATEGORY",  "KIND = \(KIND.rawValue)")
+            return count ?? 0
+        }catch let er{
+            print(er)
+            return 0
         }
-        return 0
     }
     
     func getName(ID: Int)->String?{
@@ -144,7 +154,7 @@ class CategoryEntity{
         
         guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL!)
             else{
-                print("CATEGORY: getIntPropertybyID prepare statement fail.")
+                print(Database.shared.connection!.errorMessage)
                 return nil
         }
         defer{
@@ -153,13 +163,13 @@ class CategoryEntity{
         
         guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK
             else{
-                print("CATEGORY: getIntPropertybyID bind fail.")
+                print(Database.shared.connection!.errorMessage)
                 return nil
         }
         
         guard sqlite3_step(queryStatement) == SQLITE_ROW
             else{
-                print("CATEGORY: getIntPropertybyID step fail.")
+                print(Database.shared.connection!.errorMessage)
                 return nil
         }
         return Int(sqlite3_column_int(queryStatement, 0))
@@ -170,7 +180,7 @@ class CategoryEntity{
         let SQL = "SELECT* FROM CATEGORY C WHERE C.KIND = ?"
         guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
             else{
-                print("CATEGORY: getTblCategory prepare statement fail.")
+                print(Database.shared.connection!.errorMessage)
                 return tblCategory
         }
         defer{
@@ -179,6 +189,7 @@ class CategoryEntity{
         
         guard sqlite3_bind_int(queryStatement, 1, Int32(KIND.rawValue)) == SQLITE_OK
             else{
+                print(Database.shared.connection!.errorMessage)
                 return tblCategory
         }
         
@@ -229,7 +240,7 @@ class CategoryEntity{
         }
         
         guard let updateStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
-            print("CATEGORY: update prepare statement fail.")
+            print(Database.shared.connection!.errorMessage)
             return false
         }
         defer{
@@ -238,13 +249,13 @@ class CategoryEntity{
         
         guard sqlite3_bind_int(updateStatement, 1, Int32(value)) == SQLITE_OK && sqlite3_bind_int(updateStatement, 2, Int32(ID)) == SQLITE_OK
             else{
-                print("CATEGORY: update bind fail.")
+                print(Database.shared.connection!.errorMessage)
                 return false
         }
         
         guard sqlite3_step(updateStatement) == SQLITE_ROW
             else{
-                print("CATEGORY: update step fail.")
+                print(Database.shared.connection!.errorMessage)
                 return false
         }
         
@@ -260,7 +271,7 @@ class CategoryEntity{
                   """
         
         guard let updateStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
-            print("CATEGORY: update prepare statement fail.")
+            print(Database.shared.connection!.errorMessage)
             return false
         }
         defer{
@@ -270,13 +281,13 @@ class CategoryEntity{
         let name = NAME as NSString
         guard sqlite3_bind_text(updateStatement, 1, name.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(updateStatement, 2, Int32(ID)) == SQLITE_OK
             else{
-                print("CATEGORY: update bind fail.")
+                print(Database.shared.connection!.errorMessage)
                 return false
         }
         
         guard sqlite3_step(updateStatement) == SQLITE_ROW
             else{
-                print("CATEGORY: update step fail.")
+                print(Database.shared.connection!.errorMessage)
                 return false
         }
         
@@ -285,10 +296,13 @@ class CategoryEntity{
     }
     
     func remove(id: Int) -> Bool{
-        if let r = Database.shared.connection?.remove("CATEGORY", id: id){
-            return r
+        do{
+            try Database.shared.connection?.remove("CATEGORY", id: id)
+            return true
+        }catch let er{
+            print(er)
+            return false
         }
-        return false
     }
 }
 

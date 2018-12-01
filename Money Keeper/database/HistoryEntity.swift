@@ -25,7 +25,11 @@ class HistoryEntity{
                   """
     
     private init(){
-        Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: nil)
+        do{
+            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: nil)
+        }catch let er{
+            print(er)
+        }
     }
     
     func insert(ID: Int, timeIntervalSince1970 TIME: Int, NOTE: String, IDCATEGORY: Int, MONEY: Double, IDWALLET: Int) throws{
@@ -53,17 +57,22 @@ class HistoryEntity{
     }
     
     func count() -> Int{
-        if let count = Database.shared.connection?.count("HISTORY", nil){
-            return count
+        do{
+            let count = try Database.shared.connection?.count("HISTORY", nil)
+            return count ?? 0
+        }catch let er{
+            print(er)
+            return 0
         }
-        return 0
     }
-    
     func remove(id: Int) -> Bool{
-        if let bool = Database.shared.connection?.remove("HISTORY", id: id){
-            return bool
+        do{
+            try Database.shared.connection?.remove("HISTORY", id: id)
+            return true
+        }catch let er{
+            print(er)
+            return false
         }
-        return false
     }
     
     func getHistory(ID: Int, _ WHERE: String? = nil)->History?{
