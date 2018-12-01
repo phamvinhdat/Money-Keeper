@@ -26,7 +26,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     //MASK: load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         loadArrayIncome()
         loadArrayExpense()
         setCellCategory_viewDidLoad()
@@ -35,6 +35,11 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         self.view.addGestureRecognizer(tapGesture)
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        txtExpenseIncome.setAsNumericKeyboard(delegate: self)
     }
     
     func loadArrayExpense(){
@@ -103,6 +108,8 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.delegate = self
         txtDate.resignFirstResponder()
     }
+    
+    
 }
 
 extension InputViewController:UICollectionViewDataSource, UICollectionViewDelegate{
@@ -168,4 +175,19 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
             self.navigationController?.pushViewController(sb, animated: true)
         }
     }
+}
+
+extension InputViewController: NumericKeyboardDelegate{
+    func numericKeyPressed(key: Int) {
+        //todo
+    }
+    
+    func numericHandlePressed(symbol: String) {
+        //todo
+    }
+    
+    func numericSymbolPressed(symbol: String) {
+        //todo
+    }
+
 }
