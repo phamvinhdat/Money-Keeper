@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		911760E6039B09164C8B1B6F /* Pods_Money_Keeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9649A1EADDE5A0E7130A5CC /* Pods_Money_Keeper.framework */; };
+		C41A337721B2AEDF00DBC288 /* NumericKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41A337621B2AEDF00DBC288 /* NumericKeyboard.xib */; };
 		C426CA3C219C6D080047886F /* NewAndEditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */; };
 		C45154FD219BFDCB00D9C5DB /* EditCategoryInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */; };
 		C4A6C49521AD4496006C5968 /* ParentCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		8ED45BDB5DD4505A524D276A /* Pods-Money Keeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Money Keeper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Money Keeper/Pods-Money Keeper.release.xcconfig"; sourceTree = "<group>"; };
 		A9649A1EADDE5A0E7130A5CC /* Pods_Money_Keeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Money_Keeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C41A337621B2AEDF00DBC288 /* NumericKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumericKeyboard.xib; sourceTree = "<group>"; };
 		C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndEditCategoryViewController.swift; sourceTree = "<group>"; };
 		C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryInputViewController.swift; sourceTree = "<group>"; };
 		C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCategoryViewController.swift; sourceTree = "<group>"; };
@@ -64,11 +66,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C4266F7C219F089000C77C05 /* UI */ = {
+		C41A337421B2ADBD00DBC288 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				C4D82C1421975C18006898D8 /* Main.storyboard */,
 				C4D82C1921975C1B006898D8 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		C41A337521B2AE2A00DBC288 /* Custom keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C41A337621B2AEDF00DBC288 /* NumericKeyboard.xib */,
+			);
+			path = "Custom keyboard";
+			sourceTree = "<group>";
+		};
+		C4266F7C219F089000C77C05 /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
 				C4D82C1021975C18006898D8 /* AppDelegate.swift */,
 				C4D82C1221975C18006898D8 /* InputViewController.swift */,
 				C4D82C282197E76A006898D8 /* CategoryCollectionViewCell.swift */,
@@ -76,7 +93,7 @@
 				C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */,
 				C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */,
 			);
-			path = UI;
+			path = "View controllers";
 			sourceTree = "<group>";
 		};
 		C4D82C0421975C18006898D8 = {
@@ -100,9 +117,10 @@
 		C4D82C0F21975C18006898D8 /* Money Keeper */ = {
 			isa = PBXGroup;
 			children = (
+				C41A337521B2AE2A00DBC288 /* Custom keyboard */,
 				C4D82C2D21982197006898D8 /* database */,
-				C4D82C2C21980558006898D8 /* sqlite library */,
-				C4266F7C219F089000C77C05 /* UI */,
+				C41A337421B2ADBD00DBC288 /* Storyboards */,
+				C4266F7C219F089000C77C05 /* View controllers */,
 				C4D82C2521975C90006898D8 /* Money Keeper-Bridging-Header.h */,
 				C4D82C1721975C1B006898D8 /* Assets.xcassets */,
 				C4D82C1C21975C1B006898D8 /* Info.plist */,
@@ -130,6 +148,7 @@
 		C4D82C2D21982197006898D8 /* database */ = {
 			isa = PBXGroup;
 			children = (
+				C4D82C2C21980558006898D8 /* sqlite library */,
 				C4D82C2E219821C1006898D8 /* Database.swift */,
 				C4D82C3021982839006898D8 /* IconEntity.swift */,
 				C4D82C3221987706006898D8 /* CategoryEntity.swift */,
@@ -209,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41A337721B2AEDF00DBC288 /* NumericKeyboard.xib in Resources */,
 				C4D82C1B21975C1B006898D8 /* LaunchScreen.storyboard in Resources */,
 				C4D82C1821975C1B006898D8 /* Assets.xcassets in Resources */,
 				C4D82C1621975C18006898D8 /* Main.storyboard in Resources */,
