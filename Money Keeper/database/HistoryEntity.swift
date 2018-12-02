@@ -13,7 +13,7 @@ class HistoryEntity{
     
     private let CREATETABLE = """
                   CREATE TABLE HISTORY(
-                  ID INT PRIMARY KEY,
+                  ID INT PRIMARY KEY AUTOINCREMENT,
                   TIME INT,
                   NOTE VARCHAR(500),
                   IDCATEGORY INT NOT NULL,
@@ -32,10 +32,10 @@ class HistoryEntity{
         }
     }
     
-    func insert(ID: Int, timeIntervalSince1970 TIME: Int, NOTE: String, IDCATEGORY: Int, MONEY: Double, IDWALLET: Int) throws{
+    func insert(timeIntervalSince1970 TIME: Int, NOTE: String, IDCATEGORY: Int, MONEY: Double, IDWALLET: Int) throws{
         
         let SQL = """
-            INSERT INTO HISTORY (ID, TIME, IDCATEGORY, MONEY, IDWALLET)
+            INSERT INTO HISTORY (TIME, NOTE, IDCATEGORY, MONEY, IDWALLET)
             VALUES (?, ?, ?, ?, ?)
             """
         
@@ -46,7 +46,7 @@ class HistoryEntity{
         
         let not = NOTE as NSString
         
-        guard sqlite3_bind_int(insertStatement, 1, Int32(ID)) == SQLITE_OK && sqlite3_bind_int(insertStatement, 2, Int32(TIME)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 3, not.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 4, Int32(IDCATEGORY)) == SQLITE_OK && sqlite3_bind_double(insertStatement, 5, MONEY) == SQLITE_OK && sqlite3_bind_int(insertStatement, 6, Int32(IDWALLET)) == SQLITE_OK else{
+        guard sqlite3_bind_int(insertStatement, 1, Int32(TIME)) == SQLITE_OK && sqlite3_bind_text(insertStatement, 2, not.utf8String, -1, nil) == SQLITE_OK && sqlite3_bind_int(insertStatement, 3, Int32(IDCATEGORY)) == SQLITE_OK && sqlite3_bind_double(insertStatement, 4, MONEY) == SQLITE_OK && sqlite3_bind_int(insertStatement, 5, Int32(IDWALLET)) == SQLITE_OK else{
                     throw SQLiteError.Bind(message: "HISTORY: Bind error")
             }
         

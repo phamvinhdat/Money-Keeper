@@ -96,14 +96,16 @@ class NumericKeyboard: UIView {
     }
     
     @IBAction func handlePressed(_ sender: UIButton) {
-        let symbol = sender.titleLabel?.text ?? ""
+        var symbol = sender.titleLabel?.text ?? ""
         self.delegate?.numericHandlePressed(symbol: symbol)
     }
     
     @IBAction func symbolWasPressed(_ sender: UIButton) {
-        if let symbol = sender.titleLabel?.text, symbol.characters.count > 0 {
+        if var symbol = sender.titleLabel?.text, symbol.characters.count > 0 {
+            if symbol == "x"{
+                symbol = "*"
+            }
             self.delegate?.numericSymbolPressed(symbol: symbol)
         }
     }
-    
 }

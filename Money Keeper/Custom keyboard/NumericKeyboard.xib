@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumericKeyboard" customModule="Money_Keeper" customModuleProvider="target">
             <connections>
                 <outlet property="buttonKey0" destination="JNP-8L-hvR" id="HXa-LU-Yc5"/>
-                <outlet property="buttonKey000" destination="e2l-0O-SIC" id="eIo-O8-AnI"/>
                 <outlet property="buttonKey1" destination="VpQ-wu-iLa" id="o19-Jp-EzT"/>
                 <outlet property="buttonKey2" destination="530-G8-Cfc" id="M2X-Ol-Jhb"/>
                 <outlet property="buttonKey3" destination="c45-7l-Eel" id="PAA-KA-lrz"/>
@@ -26,6 +25,7 @@
                 <outlet property="buttonKeyBackspace" destination="Xmc-an-ixa" id="kEw-bU-m8C"/>
                 <outlet property="buttonKeyClear" destination="gMe-HH-krD" id="VFi-zC-7WD"/>
                 <outlet property="buttonKeyDevide" destination="hA2-yM-Cg9" id="p21-jU-D2D"/>
+                <outlet property="buttonKeyDone" destination="e2l-0O-SIC" id="l8X-37-N4E"/>
                 <outlet property="buttonKeyEqual" destination="ycy-4i-C4h" id="byJ-xJ-Rqw"/>
                 <outlet property="buttonKeyMinus" destination="PUQ-Yq-DFM" id="9Nt-zP-vGq"/>
                 <outlet property="buttonKeyMultiply" destination="vdc-AD-fJD" id="rf9-2P-hRz"/>
@@ -135,7 +135,7 @@
                                         <action selector="numericButtonPressed:" destination="-1" eventType="touchUpInside" id="cDg-8h-ZfA"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="530-G8-Cfc">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="530-G8-Cfc">
                                     <rect key="frame" x="0.0" y="225.5" width="166" height="74.5"/>
                                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>

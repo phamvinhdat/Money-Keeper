@@ -22,6 +22,10 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var txtExpenseIncome: UITextField!
     @IBOutlet weak var txtDate: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var lblCategory: UILabel!
+    @IBOutlet weak var btnSubmit: UIButton!
+    @IBOutlet weak var lblWallet: UILabel!
+    @IBOutlet weak var WalletView: UIView!
     
     //MASK: load
     override func viewDidLoad() {
@@ -35,6 +39,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         self.view.addGestureRecognizer(tapGesture)
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
+        setWalletView_viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +82,17 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        
+        if canSubmit(){
+            
+        }
+    }
+    
+    @IBAction func txtExpenseIcome_editingEnd(_ sender: Any) {
+        if canSubmit(){
+            btnSubmit.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+        }else{
+            btnSubmit.backgroundColor = #colorLiteral(red: 0.5000228286, green: 0.9820134044, blue: 0.496680975, alpha: 1)
+        }
     }
     
     //MASK: todo
@@ -86,9 +101,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
         txtDate.text = dateFormat.string(from: DatePicker.date)
     }
-    
-    
-    
+
     @objc func viewTapped(){
         view.endEditing(true)
     }
@@ -109,7 +122,14 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.resignFirstResponder()
     }
     
+    func setWalletView_viewDidLoad(){
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(walletViewTapped))
+        self.WalletView.addGestureRecognizer(gesture)
+    }
     
+    @objc func walletViewTapped(){
+        print("datcay")
+    }
 }
 
 extension InputViewController:UICollectionViewDataSource, UICollectionViewDelegate{
@@ -174,6 +194,23 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
             sb.isExpense = self.isExpense
             self.navigationController?.pushViewController(sb, animated: true)
         }
+        else{
+            lblCategory.text = isExpense ? arrayExpense[indexPath.row].name : arrayIncome[indexPath.row].name
+            if canSubmit(){
+                btnSubmit.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+            }
+        }
+    }
+    
+    private func canSubmit()->Bool{
+        if let txt =  self.txtExpenseIncome.text, txt.count > 0{//check money
+            if let double = Double(txt), double > 0{
+                if lblCategory.text?.lowercased() != "no selected"{
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Expression
 
 private var numericKeyboardDelegate: NumericKeyboardDelegate? = nil
 
@@ -30,6 +31,7 @@ extension UITextField: NumericKeyboardDelegate{
     
     // MARK: - NumericKeyboardDelegate methods
     
+    //0...9
     internal func numericKeyPressed(key: Int) {
         if key == 0 && self.text?.isEmpty == true{
             return
@@ -38,51 +40,89 @@ extension UITextField: NumericKeyboardDelegate{
         numericKeyboardDelegate?.numericKeyPressed(key: key)
     }
     
+    private func caculator() -> String{
+        if var text = self.text, text.count > 0{
+            var double:Double? = nil
+            while text.count > 0{
+                double = Double(Expression(text).description)
+                if double != nil{
+                    return "\(double!)"
+                }
+                text.removeLast()
+            }
+        }
+        return "0"
+    }
+    
+    //clear, backspace, done, =
     internal func numericHandlePressed(symbol: String) {
-        if symbol == "Done"{
+        if symbol == "Done"{//hide keyboard
             self.endEditing(true)
-            print("done")
+            self.text = caculator()
+            return
+        }
+        
+        if symbol == "="{//caculator
+            self.text = caculator()
+            return
         }
         if var text = self.text , text.characters.count > 0 {
-            if symbol == "C"{
+            if symbol == "C"{//clear textfield
                 self.text = ""
-            }else if symbol == "="{
-                
             }else{//is backspace
                 _ = text.remove(at: text.index(before: text.endIndex))
                 self.text = text
             }
         }
-        numericKeyboardDelegate?.numericHandlePressed(symbol: symbol)
+        
+        defer{
+            numericKeyboardDelegate?.numericHandlePressed(symbol: symbol)
+        }
     }
     
+    //+, -, *, /, .
     internal func numericSymbolPressed(symbol: String){
-        
-        if var text = self.text, text.characters.count > 0 {
-            let sym = symbol.first
-            let lastCh = text.last
+        if let text = self.text, text.count > 0{
             
-            guard lastCh != sym else{
+            guard let opera = symbol.first else{
                 return
             }
             
-            if sym == "." && self.text?.isHavePointInLastNumber() == true{
-                return
+            let lastText = text.last!
+            if opera.isOperator(){//is operator
+                if lastText.isOperator() == true{
+                    guard lastText != opera else{
+                        return
+                    }
+                    _ = self.text?.removeLast()
+                }else if lastText == "."{
+                    _ = self.text?.removeLast()
+                    if let temp = self.text?.last{
+                        if temp.isOperator() == true{
+                            _ = self.text?.removeLast()
+                        }
+                    }
+                }
+            }else{//is point
+                guard text.isHavePointInLastNumber() == false else{
+                    return
+                }
             }
-            
-            if lastCh?.isOperator() == true{
-                _ = text.remove(at: text.index(before: text.endIndex))
-                self.text = text
-            }
-            self.text?.append(symbol)
+        }else if symbol == "/" || symbol == "*"{
+            return
         }
-        numericKeyboardDelegate?.numericSymbolPressed(symbol: symbol)
+        
+        self.text?.append(symbol)
+        
+        defer{
+            numericKeyboardDelegate?.numericSymbolPressed(symbol: symbol)
+        }
     }
 }
 
 extension Character{
     func isOperator()->Bool{
-        guard self != "+" && self != "-" && self != "x" && self != "/" else{
+        guard self != "+" && self != "-" && self != "*" && self != "/" else{
             return true
         }
         return false
