@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		911760E6039B09164C8B1B6F /* Pods_Money_Keeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9649A1EADDE5A0E7130A5CC /* Pods_Money_Keeper.framework */; };
 		C41A337721B2AEDF00DBC288 /* NumericKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41A337621B2AEDF00DBC288 /* NumericKeyboard.xib */; };
+		C41F526A21B3E8B9007C9B06 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F526921B3E8B9007C9B06 /* WalletViewController.swift */; };
 		C426CA3C219C6D080047886F /* NewAndEditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */; };
 		C45154FD219BFDCB00D9C5DB /* EditCategoryInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */; };
 		C49BE3D521B2B876009376A2 /* UITextfield+NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49BE3D421B2B876009376A2 /* UITextfield+NumericKeyboard.swift */; };
@@ -34,6 +35,7 @@
 		8ED45BDB5DD4505A524D276A /* Pods-Money Keeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Money Keeper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Money Keeper/Pods-Money Keeper.release.xcconfig"; sourceTree = "<group>"; };
 		A9649A1EADDE5A0E7130A5CC /* Pods_Money_Keeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Money_Keeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41A337621B2AEDF00DBC288 /* NumericKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumericKeyboard.xib; sourceTree = "<group>"; };
+		C41F526921B3E8B9007C9B06 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndEditCategoryViewController.swift; sourceTree = "<group>"; };
 		C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryInputViewController.swift; sourceTree = "<group>"; };
 		C49BE3D421B2B876009376A2 /* UITextfield+NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+NumericKeyboard.swift"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */,
 				C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */,
 				C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */,
+				C41F526921B3E8B9007C9B06 /* WalletViewController.swift */,
 			);
 			path = "View controllers";
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				C4D82C2F219821C1006898D8 /* Database.swift in Sources */,
 				C4D82C1121975C18006898D8 /* AppDelegate.swift in Sources */,
 				C426CA3C219C6D080047886F /* NewAndEditCategoryViewController.swift in Sources */,
+				C41F526A21B3E8B9007C9B06 /* WalletViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

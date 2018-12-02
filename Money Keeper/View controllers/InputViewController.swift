@@ -128,7 +128,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @objc func walletViewTapped(){
-        print("datcay")
+        let sb =
     }
 }
 
