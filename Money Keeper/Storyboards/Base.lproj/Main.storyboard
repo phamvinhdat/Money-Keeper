@@ -70,13 +70,43 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MTy-Ys-6Md">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletTableViewCell" rowHeight="73" id="MTy-Ys-6Md" customClass="WalletTableViewCell" customModule="Money_Keeper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MTy-Ys-6Md" id="EWH-4a-kSK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e6o-16-JWh">
+                                                    <rect key="frame" x="16" y="6" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="K1s-cj-AnJ"/>
+                                                        <constraint firstAttribute="width" constant="50" id="sBs-5Z-yjL"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWg-yW-5ON">
+                                                    <rect key="frame" x="82" y="16" width="42" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="p2Y-sC-rov"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="e6o-16-JWh" firstAttribute="centerY" secondItem="EWH-4a-kSK" secondAttribute="centerY" id="1MD-iI-eon"/>
+                                                <constraint firstItem="cWg-yW-5ON" firstAttribute="top" secondItem="EWH-4a-kSK" secondAttribute="top" constant="16" id="CVT-EZ-pnI"/>
+                                                <constraint firstItem="cWg-yW-5ON" firstAttribute="leading" secondItem="e6o-16-JWh" secondAttribute="trailing" constant="16" id="LOV-m4-NmP"/>
+                                                <constraint firstItem="cWg-yW-5ON" firstAttribute="centerY" secondItem="e6o-16-JWh" secondAttribute="centerY" id="VKJ-7U-eew"/>
+                                                <constraint firstItem="e6o-16-JWh" firstAttribute="leading" secondItem="EWH-4a-kSK" secondAttribute="leading" constant="16" id="fFq-nK-BZB"/>
+                                                <constraint firstAttribute="bottom" secondItem="cWg-yW-5ON" secondAttribute="bottom" constant="16" id="yen-Ag-00J"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgWallet" destination="e6o-16-JWh" id="bW9-Ph-Yfq"/>
+                                            <outlet property="lblWallet" destination="cWg-yW-5ON" id="ZxU-S1-33r"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -90,10 +120,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l45-3m-hFq"/>
                     </view>
+                    <connections>
+                        <outlet property="walletTable" destination="OC4-ET-C6t" id="gLv-R0-cPZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcO-U0-fCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-769" y="847"/>
+            <point key="canvasLocation" x="-770.39999999999998" y="846.9265367316342"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="lfS-mV-Qcs">

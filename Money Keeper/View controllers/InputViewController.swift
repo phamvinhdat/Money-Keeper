@@ -15,6 +15,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     var arrayExpense = [Category]()
     var arrayIncome = [Category]()
     var isExpense:Bool = true
+    var history = History()
     
     //MASK: outlet
     @IBOutlet weak var lblExpense: UILabel!
@@ -40,6 +41,9 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         setDatePicker_viewDidLoad()
         setTxtDay_viewDidLoad()
         setWalletView_viewDidLoad()
+        
+        //set default history
+        history.idWallet = 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +132,8 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @objc func walletViewTapped(){
-        let sb =
+        let sb = self.storyboard?.instantiateViewController(withIdentifier: "WalletViewController")
+        self.navigationController?.pushViewController(sb!, animated: true)
     }
 }
 

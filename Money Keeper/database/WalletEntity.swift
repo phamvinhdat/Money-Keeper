@@ -12,18 +12,18 @@ class WalletEntity{
     static let shared = WalletEntity()
     
     private let CREATETABLE = """
-                  CREATE TABLE WALLET(
+                  CREATE TABLE WALLET (
                   ID INT PRIMARY KEY,
-                  NAME VARCHAR(250) NOT NULL,
+                  NAME VARCHAR(255) NOT NULL,
                   IDICON INT NOT NULL,
                   BALANCE DOUBLE NOT NULL,
-                  FOREIGN KEY (IDICON) REFERENCES ICON(ID),
+                  FOREIGN KEY (IDICON) REFERENCES ICON(ID)
                   )
                   """
     
     private init(){
         do {
-            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: nil)
+            try Database.shared.connection?.CreateTable(SQL: self.CREATETABLE, Complete: self.defaultInsert)
         }catch let er{
             print(er)
         }
@@ -77,5 +77,85 @@ class WalletEntity{
             print(er)
             return false
         }
+    }
+    
+    func getWallet(ID: Int, _ WHERE: String? = nil)->Wallet?{
+        var SQL = """
+                  SELECT *
+                  FROM WALLET
+                  WHERE ID = ?
+                  """
+        
+        if let wh = WHERE{
+            SQL.append(" AND \(wh)")
+        }
+        
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("WALLET: get prepare statement fail.")
+                return nil
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        guard sqlite3_bind_int(queryStatement, 1, Int32(ID)) == SQLITE_OK
+            else{
+                print("WALLET: bind statement fail.")
+                return nil
+        }
+        
+        if sqlite3_step(queryStatement) == SQLITE_ROW{
+            let wallet = Wallet()
+            wallet.id = Int(sqlite3_column_int(queryStatement, 0))
+            let queryTemp = sqlite3_column_text(queryStatement, 1)
+            wallet.name = String(cString: queryTemp!)
+            wallet.idIcon = Int(sqlite3_column_int(queryStatement, 2))
+            wallet.balance = sqlite3_column_double(queryStatement, 3)
+            
+            return wallet
+        }
+        return nil
+    }
+    
+    func getWallets()->[Wallet]{
+        var SQL = """
+                  SELECT *
+                  FROM WALLET
+                  """
+        var wallets = [Wallet]()
+        
+        guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
+            else{
+                print("WALLET: get prepare statement fail.")
+                return wallets
+        }
+        defer{
+            sqlite3_finalize(queryStatement)
+        }
+        
+        while sqlite3_step(queryStatement) == SQLITE_ROW{
+            let wallet = Wallet()
+            wallet.id = Int(sqlite3_column_int(queryStatement, 0))
+            let queryTemp = sqlite3_column_text(queryStatement, 1)
+            wallet.name = String(cString: queryTemp!)
+            wallet.idIcon = Int(sqlite3_column_int(queryStatement, 2))
+            wallet.balance = sqlite3_column_double(queryStatement, 3)
+            wallets.append(wallet)
+        }
+        return wallets
+    }
+}
+
+class Wallet{
+    var id:Int
+    var name: String
+    var idIcon: Int
+    var balance: Double
+    init() {
+        id = Int(0)
+        name = String()
+        idIcon = Int(0)
+        balance = Double(0)
     }
 }

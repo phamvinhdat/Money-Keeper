@@ -16,6 +16,7 @@
 		C49BE3D721B2B890009376A2 /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49BE3D621B2B890009376A2 /* NumericKeyboard.swift */; };
 		C49BE3D921B2B97D009376A2 /* customKeyboardAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49BE3D821B2B97D009376A2 /* customKeyboardAssets.xcassets */; };
 		C4A6C49521AD4496006C5968 /* ParentCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */; };
+		C4BD284921B61A2000CA8B10 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BD284821B61A2000CA8B10 /* WalletTableViewCell.swift */; };
 		C4D82C1121975C18006898D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C1021975C18006898D8 /* AppDelegate.swift */; };
 		C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D82C1221975C18006898D8 /* InputViewController.swift */; };
 		C4D82C1621975C18006898D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D82C1421975C18006898D8 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		C49BE3D621B2B890009376A2 /* NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
 		C49BE3D821B2B97D009376A2 /* customKeyboardAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = customKeyboardAssets.xcassets; sourceTree = "<group>"; };
 		C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCategoryViewController.swift; sourceTree = "<group>"; };
+		C4BD284821B61A2000CA8B10 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
 		C4D82C0D21975C18006898D8 /* Money Keeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Keeper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D82C1021975C18006898D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D82C1221975C18006898D8 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */,
 				C4A6C49421AD4496006C5968 /* ParentCategoryViewController.swift */,
 				C41F526921B3E8B9007C9B06 /* WalletViewController.swift */,
+				C4BD284821B61A2000CA8B10 /* WalletTableViewCell.swift */,
 			);
 			path = "View controllers";
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4BD284921B61A2000CA8B10 /* WalletTableViewCell.swift in Sources */,
 				C4D82C3121982839006898D8 /* IconEntity.swift in Sources */,
 				C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */,
 				C4A6C49521AD4496006C5968 /* ParentCategoryViewController.swift in Sources */,
