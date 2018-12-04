@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftMessages
 
 class InputViewController: UIViewController, UITextFieldDelegate{
     
@@ -31,7 +32,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     //MASK: load
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         loadArrayIncome()
         loadArrayExpense()
         setCellCategory_viewDidLoad()
@@ -79,6 +80,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         if sender.tag == 1{
             isNextDay = false
         }
+        
         datePicker!.date = NSDate(timeInterval: TimeInterval(60 * 60 * (isNextDay == true ? 24 : -24)), since: datePicker!.date) as Date
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "EEEE, yyyy/MM/dd"
@@ -86,16 +88,42 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
+        
+        let banner = MessageView.viewFromNib(layout: .messageView)
+        banner.configureContent(title: "Saved", body: "Your notes have been saved")
+        banner.configureTheme(.success)
+        banner.button?.isHidden = true
+        
+        SwiftMessages.show(view: banner)
+        
         if canSubmit(){
+            if let note = txtNote.text, note.count > 0{
+                history.note = note
+            }
+            let time = datePicker?.date.timeIntervalSince1970
+            history.time = Int(time!)
             
+            //save to database
+            do {
+                try HistoryEntity.shared.insert(timeIntervalSince1970: history.time, NOTE: history.note ?? "", IDCATEGORY: history.idCategory, MONEY: history.money, IDWALLET: history.idWallet)
+                let banner = MessageView.viewFromNib(layout: .messageView)
+                banner.configureContent(title: "Successfully", body: "Your changed has been saved!")
+                banner.configureTheme(.success)
+                banner.tapHandler = { _ in print("daudah")}
+                SwiftMessages.show(view: banner)
+                
+            }catch let er{
+                let alert = UIAlertController(title: "Error", message: er.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            }
         }
     }
     
     @IBAction func txtExpenseIcome_editingEnd(_ sender: Any) {
         if canSubmit(){
-            btnSubmit.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
         }else{
-            btnSubmit.backgroundColor = #colorLiteral(red: 0.5000228286, green: 0.9820134044, blue: 0.496680975, alpha: 1)
+            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 0.5)
         }
     }
     
@@ -202,7 +230,7 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
         else{
             lblCategory.text = isExpense ? arrayExpense[indexPath.row].name : arrayIncome[indexPath.row].name
             if canSubmit(){
-                btnSubmit.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+                btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
             }
         }
     }

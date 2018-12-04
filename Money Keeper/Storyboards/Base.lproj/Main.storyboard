@@ -188,7 +188,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eX-4z-gYh">
                                 <rect key="frame" x="16" y="557" width="343" height="45"/>
-                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="edA-bD-mGY"/>
                                 </constraints>
@@ -395,7 +395,7 @@
                                 <segment title="Expense"/>
                                 <segment title="Income"/>
                             </segments>
-                            <color key="tintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="expense_selectorChange:" destination="WgD-Ft-gSx" eventType="valueChanged" id="hlQ-Do-FUi"/>
                             </connections>
@@ -532,7 +532,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.50002282857894897" green="0.98201340436935425" blue="0.49668097496032715" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="xnS-Kq-7i3" firstAttribute="leading" secondItem="WCR-gr-jHi" secondAttribute="leading" constant="16" id="2yK-O5-yxK"/>
                                     <constraint firstItem="iQA-kV-54F" firstAttribute="centerY" secondItem="xnS-Kq-7i3" secondAttribute="centerY" id="4fZ-YN-mzU"/>
@@ -569,7 +569,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.50002282860000002" green="0.98201340439999996" blue="0.49668097500000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Y6M-hc-kQY" firstAttribute="top" secondItem="ha9-TG-uj6" secondAttribute="top" constant="8" id="029-3F-LLN"/>
                                     <constraint firstItem="3F7-7w-8Ky" firstAttribute="leading" secondItem="Y6M-hc-kQY" secondAttribute="trailing" constant="16" id="DUb-Vq-crh"/>
@@ -630,7 +630,7 @@
                                         </cells>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.50002282860000002" green="0.98201340439999996" blue="0.49668097500000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="r2p-SX-KmO" firstAttribute="leading" secondItem="NwI-kc-UaA" secondAttribute="leading" constant="16" id="12a-FH-p9t"/>
                                     <constraint firstItem="sCa-i5-GMt" firstAttribute="top" secondItem="r2p-SX-KmO" secondAttribute="bottom" constant="8" id="Z0K-WR-BIg"/>
@@ -744,7 +744,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NB6-iB-whF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.37038940190000003" green="0.61844599249999999" blue="0.085079438980000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="t6u-tw-kbi" kind="relationship" relationship="viewControllers" id="WeK-7Y-ZHP"/>

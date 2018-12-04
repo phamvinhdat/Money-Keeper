@@ -1,20 +1,26 @@
 PODS:
   - Expression (0.12.11)
   - Floaty (4.1.0)
+  - SwiftMessages (6.0.1):
+    - SwiftMessages/App (= 6.0.1)
+  - SwiftMessages/App (6.0.1)
 
 DEPENDENCIES:
   - Expression (~> 0.12)
   - Floaty (~> 4.1.0)
+  - SwiftMessages
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Expression
     - Floaty
+    - SwiftMessages
 
 SPEC CHECKSUMS:
   Expression: e95e5008e48a066c90b40c7962823d252e908440
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
+  SwiftMessages: 42ed7b6e1f2f1ead9ee667dc61a0ae87e4f49570
 
-PODFILE CHECKSUM: cc35ad1b7bb73bb3478404f49fb3d5345c67fdf6
+PODFILE CHECKSUM: cd8ea2784be3f3ea3d8ebcc84bf5bb2ae5033b5e
 
 COCOAPODS: 1.5.3

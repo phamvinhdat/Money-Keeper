@@ -29,9 +29,9 @@ class ParentCategoryViewController: UIViewController {
     func setNavigationbar_viewDidLoad(){
         let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
         self.navigationItem.title = "Parent category"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2669004202, green: 0.9800816178, blue: 0.4496235847, alpha: 1)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)]
         self.navigationItem.leftBarButtonItem = btLeft
-        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
     }
     
     @objc func btnBack_tapped(){

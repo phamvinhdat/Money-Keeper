@@ -45,11 +45,11 @@ class NewAndEditCategoryViewController: UIViewController{
         let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel-music"), style: .plain, target: self, action: #selector(cancel_tapped))
         let btRight = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save_tapped))
         self.navigationItem.title = self.strTitle
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2669004202, green: 0.9800816178, blue: 0.4496235847, alpha: 1)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)]
         self.navigationItem.leftBarButtonItem = btLeft
         self.navigationItem.rightBarButtonItem = btRight
-        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
-        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2669004202, green: 0.9800816178, blue: 0.4496235847, alpha: 1)
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
     }
     
     @objc func viewParentCategory_tapped(_ sender: UITapGestureRecognizer){

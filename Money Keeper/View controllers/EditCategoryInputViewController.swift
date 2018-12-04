@@ -76,10 +76,10 @@ class EditCategoryInputViewController: UIViewController {
     func setNavigationbar_viewDidLoad(){
         let btLeft = UIBarButtonItem(image: #imageLiteral(resourceName: "ict-left"), style: .plain, target: self, action: #selector(btnBack_tapped))
         self.navigationItem.leftBarButtonItem = btLeft
-        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2661139554, green: 1, blue: 0.4494246345, alpha: 1)
+        self.navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
         segment.insertSegment(withTitle: "Expense", at: 0, animated: true)
         segment.insertSegment(withTitle: "Income", at: 1, animated: true)
-        segment.tintColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+        segment.tintColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
         segment.selectedSegmentIndex = self.isExpense ? 0 : 1
         segment.addTarget(self, action: #selector(segment_ValueChanged), for: .valueChanged)
         self.navigationItem.titleView = segment

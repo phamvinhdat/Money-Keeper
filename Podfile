@@ -6,6 +6,7 @@ target 'Money Keeper' do
   use_frameworks!
   pod "Floaty", "~> 4.1.0"
   pod 'Expression', '~> 0.12'
+  pod 'SwiftMessages'
   # Pods for Money Keeper
 
 end
