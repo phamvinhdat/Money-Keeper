@@ -37,7 +37,7 @@ class WalletEntity{
         }
     }
     
-    func insert(ID: Int, NAME: String, IDICON: Int, BALANCE: Double = 0) throws{
+    public func insert(ID: Int, NAME: String, IDICON: Int, BALANCE: Double = 0) throws{
         let SQL = """
                   INSERT INTO WALLET (ID, NAME, IDICON, BALANCE)
                   VALUES (?, ?, ?, ?)
@@ -59,7 +59,7 @@ class WalletEntity{
         print("WALLET: Successfully inserted row.")
     }
     
-    func count() -> Int{
+    public func count() -> Int{
         do {
             let count = try Database.shared.connection?.count("WALLET", nil)
             return count ?? 0
@@ -69,7 +69,7 @@ class WalletEntity{
         }
     }
     
-    func remove(id: Int) -> Bool{
+    public func remove(id: Int) -> Bool{
         do{
             try Database.shared.connection?.remove("WALLET", id: id)
             return true
@@ -79,7 +79,7 @@ class WalletEntity{
         }
     }
     
-    func getWallet(ID: Int, _ WHERE: String? = nil)->Wallet?{
+    public func getWallet(ID: Int, _ WHERE: String? = nil)->Wallet?{
         var SQL = """
                   SELECT *
                   FROM WALLET
@@ -118,7 +118,11 @@ class WalletEntity{
         return nil
     }
     
-    func getWallets()->[Wallet]{
+    public func update(_ SQL: String) -> Bool{
+        return Database.shared.connection?.update(SQL: SQL) ?? false
+    }
+    
+    public func getWallets()->[Wallet]{
         var SQL = """
                   SELECT *
                   FROM WALLET

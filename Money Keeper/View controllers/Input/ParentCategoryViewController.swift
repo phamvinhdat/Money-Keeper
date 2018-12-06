@@ -43,9 +43,9 @@ class ParentCategoryViewController: UIViewController {
         self.arrParentCategory = [Category]()
         var arrTemp = [Category]()
         if isExpense{
-            arrTemp = CategoryEntity.shared.getTblCategory(KIND: .expense)
+            arrTemp = CategoryEntity.shared.getCategories(KIND: .expense)
         }else{
-            arrTemp = CategoryEntity.shared.getTblCategory(KIND: .income)
+            arrTemp = CategoryEntity.shared.getCategories(KIND: .income)
         }
         
         for item in arrTemp{

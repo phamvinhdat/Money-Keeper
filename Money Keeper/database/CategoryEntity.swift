@@ -63,7 +63,7 @@ class CategoryEntity{
     }
     
     //PARENTCATEGORY: 0_root
-    func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Kind) throws{
+    public func insert(ID: Int, NAME: String, IDICON: Int, PARENTCATEGORY: Int, KIND: Kind) throws{
         let SQL = """
                   INSERT INTO CATEGORY (ID, NAME, IDICON, PARENTCATEGORY, KIND)
                   VALUES (?, ?, ?, ?, ?)
@@ -86,7 +86,7 @@ class CategoryEntity{
         print("CATEGORY: Successfully inserted row.")
     }
     
-    func count() -> Int{
+    public func count() -> Int{
         do {
             let count = try Database.shared.connection?.count("CATEGORY", nil)
             return count ?? 0
@@ -96,7 +96,7 @@ class CategoryEntity{
         }
     }
     
-    func count(KIND: Kind) -> Int{
+    public func count(KIND: Kind) -> Int{
         do {
             let count = try Database.shared.connection?.count("CATEGORY",  "KIND = \(KIND.rawValue)")
             return count ?? 0
@@ -106,7 +106,7 @@ class CategoryEntity{
         }
     }
     
-    func getName(ID: Int)->String?{
+    public func getName(ID: Int)->String?{
         let SQL = """
                   SELECT NAME
                   FROM CATEGORY
@@ -137,7 +137,7 @@ class CategoryEntity{
         return result
     }
     
-    func getIntPropertybyID(ID: Int, property: IntProperty) -> Int?{
+    public func getIntPropertybyID(ID: Int, property: IntProperty) -> Int?{
         var SQL:String? = nil
         
         switch property{
@@ -175,7 +175,7 @@ class CategoryEntity{
         return Int(sqlite3_column_int(queryStatement, 0))
     }
     
-    func getTblCategory(KIND: Kind) -> [Category]{
+    public func getCategories(KIND: Kind) -> [Category]{
         var tblCategory = [Category]()
         let SQL = "SELECT* FROM CATEGORY C WHERE C.KIND = ?"
         guard let queryStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL)
@@ -212,7 +212,7 @@ class CategoryEntity{
         return tblCategory
     }
     
-    func update(ID: Int, _ property: IntProperty, value: Int) -> Bool{
+    public func update(ID: Int, _ property: IntProperty, value: Int) -> Bool{
         var SQL: String!
         
         switch property{
@@ -263,7 +263,7 @@ class CategoryEntity{
         return true
     }
     
-    func update(ID: Int, NAME: String) -> Bool{
+    public func update(ID: Int, NAME: String) -> Bool{
         var SQL = """
                   UPDATE CATEGORY
                   SET NAME = ?

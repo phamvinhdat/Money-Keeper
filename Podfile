@@ -7,6 +7,7 @@ target 'Money Keeper' do
   pod "Floaty", "~> 4.1.0"
   pod 'Expression', '~> 0.12'
   pod 'SwiftMessages'
+  pod 'JTAppleCalendar', '~> 7.0'
   # Pods for Money Keeper
 
 end

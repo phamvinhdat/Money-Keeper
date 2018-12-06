@@ -12,6 +12,8 @@
 		C41F526A21B3E8B9007C9B06 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F526921B3E8B9007C9B06 /* WalletViewController.swift */; };
 		C426CA3C219C6D080047886F /* NewAndEditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */; };
 		C45154FD219BFDCB00D9C5DB /* EditCategoryInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */; };
+		C45B80A821B91FB600FD00E5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B80A721B91FB600FD00E5 /* CalendarViewController.swift */; };
+		C45B80AA21B92F9600FD00E5 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B80A921B92F9600FD00E5 /* CalendarCell.swift */; };
 		C49BE3D521B2B876009376A2 /* UITextfield+NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49BE3D421B2B876009376A2 /* UITextfield+NumericKeyboard.swift */; };
 		C49BE3D721B2B890009376A2 /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49BE3D621B2B890009376A2 /* NumericKeyboard.swift */; };
 		C49BE3D921B2B97D009376A2 /* customKeyboardAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49BE3D821B2B97D009376A2 /* customKeyboardAssets.xcassets */; };
@@ -39,6 +41,8 @@
 		C41F526921B3E8B9007C9B06 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		C426CA3B219C6D080047886F /* NewAndEditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndEditCategoryViewController.swift; sourceTree = "<group>"; };
 		C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryInputViewController.swift; sourceTree = "<group>"; };
+		C45B80A721B91FB600FD00E5 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		C45B80A921B92F9600FD00E5 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		C49BE3D421B2B876009376A2 /* UITextfield+NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+NumericKeyboard.swift"; sourceTree = "<group>"; };
 		C49BE3D621B2B890009376A2 /* NumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
 		C49BE3D821B2B97D009376A2 /* customKeyboardAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = customKeyboardAssets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +103,15 @@
 		C4266F7C219F089000C77C05 /* View controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C45B80A521B91F4300FD00E5 /* Input */,
+				C45B80A621B91F5E00FD00E5 /* Calendar */,
+			);
+			path = "View controllers";
+			sourceTree = "<group>";
+		};
+		C45B80A521B91F4300FD00E5 /* Input */ = {
+			isa = PBXGroup;
+			children = (
 				C4D82C1021975C18006898D8 /* AppDelegate.swift */,
 				C4D82C1221975C18006898D8 /* InputViewController.swift */,
 				C45154FC219BFDCB00D9C5DB /* EditCategoryInputViewController.swift */,
@@ -108,7 +121,16 @@
 				C41F526921B3E8B9007C9B06 /* WalletViewController.swift */,
 				C4BD284821B61A2000CA8B10 /* WalletTableViewCell.swift */,
 			);
-			path = "View controllers";
+			path = Input;
+			sourceTree = "<group>";
+		};
+		C45B80A621B91F5E00FD00E5 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				C45B80A721B91FB600FD00E5 /* CalendarViewController.swift */,
+				C45B80A921B92F9600FD00E5 /* CalendarCell.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		C4D82C0421975C18006898D8 = {
@@ -287,6 +309,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Money Keeper/Pods-Money Keeper-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Expression/Expression.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -295,6 +318,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expression.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +335,7 @@
 			files = (
 				C4BD284921B61A2000CA8B10 /* WalletTableViewCell.swift in Sources */,
 				C4D82C3121982839006898D8 /* IconEntity.swift in Sources */,
+				C45B80A821B91FB600FD00E5 /* CalendarViewController.swift in Sources */,
 				C4D82C1321975C18006898D8 /* InputViewController.swift in Sources */,
 				C4A6C49521AD4496006C5968 /* ParentCategoryViewController.swift in Sources */,
 				C4F8354E21AEAC0E0002BE2F /* WalletEntity.swift in Sources */,
@@ -321,6 +346,7 @@
 				C49BE3D721B2B890009376A2 /* NumericKeyboard.swift in Sources */,
 				C4D82C2B2198054A006898D8 /* SQLiteDatabase.swift in Sources */,
 				C49BE3D521B2B876009376A2 /* UITextfield+NumericKeyboard.swift in Sources */,
+				C45B80AA21B92F9600FD00E5 /* CalendarCell.swift in Sources */,
 				C4D82C2F219821C1006898D8 /* Database.swift in Sources */,
 				C4D82C1121975C18006898D8 /* AppDelegate.swift in Sources */,
 				C426CA3C219C6D080047886F /* NewAndEditCategoryViewController.swift in Sources */,

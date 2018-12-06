@@ -50,14 +50,17 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         txtExpenseIncome.setAsNumericKeyboard(delegate: self)
+        
+        //wallet text
+        lblWallet.text = WalletEntity.shared.getWallet(ID: history.idWallet)!.name
     }
     
     func loadArrayExpense(){
-        arrayExpense = CategoryEntity.shared.getTblCategory(KIND: .expense)
+        arrayExpense = CategoryEntity.shared.getCategories(KIND: .expense)
     }
     
     func loadArrayIncome(){
-        arrayIncome = CategoryEntity.shared.getTblCategory(KIND: .income)
+        arrayIncome = CategoryEntity.shared.getCategories(KIND: .income)
     }
     
     //MASK: Action
@@ -88,33 +91,46 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        
-        let banner = MessageView.viewFromNib(layout: .messageView)
-        banner.configureContent(title: "Saved", body: "Your notes have been saved")
-        banner.configureTheme(.success)
-        banner.button?.isHidden = true
-        
-        SwiftMessages.show(view: banner)
-        
         if canSubmit(){
             if let note = txtNote.text, note.count > 0{
                 history.note = note
             }
             let time = datePicker?.date.timeIntervalSince1970
             history.time = Int(time!)
-            
+
             //save to database
             do {
                 try HistoryEntity.shared.insert(timeIntervalSince1970: history.time, NOTE: history.note ?? "", IDCATEGORY: history.idCategory, MONEY: history.money, IDWALLET: history.idWallet)
-                let banner = MessageView.viewFromNib(layout: .messageView)
-                banner.configureContent(title: "Successfully", body: "Your changed has been saved!")
-                banner.configureTheme(.success)
-                banner.tapHandler = { _ in print("daudah")}
-                SwiftMessages.show(view: banner)
                 
-            }catch let er{
-                let alert = UIAlertController(title: "Error", message: er.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                //update wallet
+                let balance = WalletEntity.shared.getWallet(ID: history.idWallet)!.balance
+                self.history.money = Double(txtExpenseIncome.text!)!
+                let newBalance = balance - history.money * (self.isExpense ? 1 : -1)
+                
+                let sql = """
+                UPDATE WALLET
+                SET BALANCE = \(newBalance)
+                WHERE ID = \(history.idWallet)
+                """
+                _ = WalletEntity.shared.update(sql)
+                
+                //create banner
+                let banner = MessageView.viewFromNib(layout: .messageView)
+                banner.configureContent(title: "Saved", body: "Your notes have been saved")
+                banner.configureTheme(.success)
+                banner.button?.isHidden = true
+                banner.tapHandler = { _ in SwiftMessages.hide()}
+                SwiftMessages.show(view: banner)
+                //set view default
+                self.txtExpenseIncome.text = "0.0"
+                self.btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 0.5)
+            }catch let er{//show banner error annoucement
+                let banner = MessageView.viewFromNib(layout: .messageView)
+                banner.configureContent(title: "Error", body: er.localizedDescription)
+                banner.configureTheme(.error)
+                banner.button?.isHidden = true
+                banner.tapHandler = { _ in SwiftMessages.hide()}
+                SwiftMessages.show(view: banner)
             }
         }
     }

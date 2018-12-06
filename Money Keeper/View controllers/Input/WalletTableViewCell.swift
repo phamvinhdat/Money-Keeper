@@ -10,8 +10,10 @@ import UIKit
 
 class WalletTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var lblWallet: UILabel!
+    @IBOutlet weak var lblWalletName: UILabel!
     @IBOutlet weak var imgWallet: UIImageView!
+    @IBOutlet weak var lblWalletBalance: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -13,7 +13,7 @@ class HistoryEntity{
     
     private let CREATETABLE = """
                   CREATE TABLE HISTORY(
-                  ID INT PRIMARY KEY AUTOINCREMENT,
+                  ID INTEGER PRIMARY KEY AUTOINCREMENT,
                   TIME INT,
                   NOTE VARCHAR(500),
                   IDCATEGORY INT NOT NULL,

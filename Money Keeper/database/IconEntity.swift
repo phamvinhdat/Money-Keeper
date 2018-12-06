@@ -91,7 +91,7 @@ class IconEntity{
         }
     }
     
-    func getName(ID: Int)->String?{
+    public func getName(ID: Int)->String?{
         let SQL = """
                   SELECT NAME
                   FROM ICON
@@ -129,7 +129,7 @@ class IconEntity{
         }
     }
     
-    func insert(ID: Int, NAME: String) throws{
+    public func insert(ID: Int, NAME: String) throws{
         let SQL = """
                   INSERT INTO ICON (ID, NAME)
                   VALUES (?, ?)
@@ -151,7 +151,7 @@ class IconEntity{
         print("ICON: Successfully inserted row.")
     }
     
-    func count() -> Int{
+    public func count() -> Int{
         do {
             let count = try Database.shared.connection?.count("ICON", nil)
             return count ?? 0

@@ -51,13 +51,25 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WalletTableViewCell", for: indexPath) as! WalletTableViewCell
         if indexPath.row == 0 {
-            cell.lblWallet.text = "New Wallet"
+            cell.lblWalletName.text = "New Wallet"
         }else{
             if let imgName = IconEntity.shared.getName(ID: wallets[indexPath.row - 1].idIcon){
                 cell.imgWallet.image = UIImage(named: imgName)
             }
-            cell.lblWallet.text = wallets[indexPath.row - 1].name
+            cell.lblWalletName.text = wallets[indexPath.row - 1].name
+            cell.lblWalletBalance.text = "\(wallets[indexPath.row - 1].balance)"
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+            //new wallet
+            
+        }else{
+            let inputView = self.navigationController?.viewControllers[0] as! InputViewController
+            inputView.history.idWallet = wallets[indexPath.row - 1].id
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

@@ -122,6 +122,23 @@ class SQLiteDatabase{
         print("\(tableName): remove successfully.")
     }
     
+    func update(SQL: String) -> Bool{
+        guard let updateStatement = try? Database.shared.connection?.prepareStatement(SQL: SQL) else{
+            print(Database.shared.connection!.errorMessage)
+            return false
+        }
+        defer{
+            sqlite3_finalize(updateStatement)
+        }
+        
+        guard sqlite3_step(updateStatement) == SQLITE_ROW
+            else{
+                print(Database.shared.connection!.errorMessage)
+                return false
+        }
+        
+        return true
+    }
 }
 
 enum SQLiteError: Error {
