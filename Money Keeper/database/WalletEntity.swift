@@ -16,7 +16,7 @@ class WalletEntity{
                   ID INT PRIMARY KEY,
                   NAME VARCHAR(255) NOT NULL,
                   IDICON INT NOT NULL,
-                  BALANCE DOUBLE NOT NULL,
+                  BALANCE REAL NOT NULL,
                   FOREIGN KEY (IDICON) REFERENCES ICON(ID)
                   )
                   """

@@ -51,5 +51,101 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Money Keeper/database/HistoryEntity.swift"
+            timestampString = "566997493.9331549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "getBalanceOfDate(Time:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of Money_Keeper.HistoryEntity.getBalanceOfDate(Time: Foundation.Date, _: Swift.Optional&lt;(Foundation.Date, Foundation.Date) -&gt; Swift.Bool&gt;) -&gt; Swift.Double"
+                  moduleName = "Money Keeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andromeda/Documents/GitHub/Money-Keeper/Money%20Keeper/database/HistoryEntity.swift"
+                  timestampString = "566553599.381278"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Money_Keeper.HistoryEntity.getBalanceOfDate(Time: Foundation.Date, _: Swift.Optional&lt;(Foundation.Date, Foundation.Date) -&gt; Swift.Bool&gt;) -&gt; Swift.Double"
+                  moduleName = "Money Keeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andromeda/Documents/GitHub/Money-Keeper/Money%20Keeper/database/HistoryEntity.swift"
+                  timestampString = "566553599.389841"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Money Keeper/View controllers/Calendar/CalendarViewController.swift"
+            timestampString = "566993143.694936"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "calendar(_:cellForItemAt:cellState:indexPath:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Money Keeper/database/HistoryEntity.swift"
+            timestampString = "566997493.9336179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "getHistory(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Money Keeper/View controllers/Calendar/CalendarViewController.swift"
+            timestampString = "566993143.696663"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -90,21 +90,33 @@ class InputViewController: UIViewController, UITextFieldDelegate{
         txtDate.text = dateFormat.string(from: datePicker!.date)
     }
     
+    func printHistory(h: History){
+        print("id:\(h.id)")
+        print("idCategory:\(h.idCategory)")
+        print("idWallet:\(h.idWallet)")
+        print("money:\(h.money)")
+        print("note:\(h.note)")
+        print("time:\(h.time)")
+    }
+    
     @IBAction func btnSubmit(_ sender: Any) {
         if canSubmit(){
             if let note = txtNote.text, note.count > 0{
                 history.note = note
             }
-            let time = datePicker?.date.timeIntervalSince1970
-            history.time = Int(time!)
+            
+            let time = HistoryEntity.shared.dateFormatter.string(from: datePicker!.date)
+            history.time = time
 
+            history.money = Double(txtExpenseIncome.text!) ?? 0
             //save to database
             do {
-                try HistoryEntity.shared.insert(timeIntervalSince1970: history.time, NOTE: history.note ?? "", IDCATEGORY: history.idCategory, MONEY: history.money, IDWALLET: history.idWallet)
+                try HistoryEntity.shared.insert(timeFormat: history.time, NOTE: history.note ?? "", IDCATEGORY: history.idCategory, MONEY: history.money, IDWALLET: history.idWallet)
+                
+                printHistory(h: history)
                 
                 //update wallet
                 let balance = WalletEntity.shared.getWallet(ID: history.idWallet)!.balance
-                self.history.money = Double(txtExpenseIncome.text!)!
                 let newBalance = balance - history.money * (self.isExpense ? 1 : -1)
                 
                 let sql = """
@@ -136,11 +148,7 @@ class InputViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func txtExpenseIcome_editingEnd(_ sender: Any) {
-        if canSubmit(){
-            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
-        }else{
-            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 0.5)
-        }
+        HandleCanSubmit()
     }
     
     //MASK: todo
@@ -244,10 +252,18 @@ extension InputViewController:UICollectionViewDataSource, UICollectionViewDelega
             self.navigationController?.pushViewController(sb, animated: true)
         }
         else{
-            lblCategory.text = isExpense ? arrayExpense[indexPath.row].name : arrayIncome[indexPath.row].name
-            if canSubmit(){
-                btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
-            }
+            let category = isExpense ? arrayExpense[indexPath.row] : arrayIncome[indexPath.row]
+            lblCategory.text = category.name
+            self.history.idCategory = category.id
+            HandleCanSubmit()
+        }
+    }
+    
+    private func HandleCanSubmit(){
+        if canSubmit(){
+            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 1)
+        }else{
+            btnSubmit.backgroundColor = #colorLiteral(red: 0.3703894019, green: 0.6184459925, blue: 0.08507943898, alpha: 0.5)
         }
     }
     

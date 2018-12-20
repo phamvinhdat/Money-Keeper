@@ -11,10 +11,12 @@ import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
     @IBOutlet weak var lblDay: UILabel!
-    @IBOutlet weak var lblMoney: UILabel!
+    @IBOutlet weak var lblIncome: UILabel!
+    @IBOutlet weak var lblExpense: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     }
 }
