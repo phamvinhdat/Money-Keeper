@@ -52,9 +52,16 @@ class CalendarViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    private func _monthCompare(_ d1: Date, _ d2: Date) -> Bool{
+        let calendar = Calendar.current
+        return calendar.component(.year, from: d1) == calendar.component(.year, from: d2) && calendar.component(.month, from: d1) == calendar.component(.month, from: d2)
+    }
+    
     private func LoadTableViewData(date: Date) -> [String : [History]]{
         let temp = HistoryEntity.shared.getHistory()
         var result = [String : [History]]()
+        
+        let incomeMoney = HistoryEntity.shared.getMoneyOfDate(kind: .income, Time: date, _monthCompare(_:_:))
         dateFormat.dateFormat = "dd MM yyyy"
         
         let calendar = Calendar.current
